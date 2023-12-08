@@ -9,6 +9,10 @@
       "main": "canisters/authentication/authentication.mo",
       "type": "motoko"
     },
+    "httpOutcalls": {
+      "main": "canisters/httpOutcalls/friendTech.mo",
+      "type": "motoko"
+    },
     "assets": {
       "dependencies": ["purify"],
       "frontend": {
