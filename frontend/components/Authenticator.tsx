@@ -35,7 +35,7 @@ const Authenticator = ({
   const login = async () => {
     const authClient = await AuthClient.create()
     authClient.login({
-      identityProvider: `http://localhost:4943/?canisterId=rdmx6-jaaaa-aaaaa-aaadq-cai`,
+      identityProvider: `http://localhost:4943/?canisterId=b77ix-eeaaa-aaaaa-qaada-cai`,
       onSuccess: () => {
         console.log("Logged in")
         setIsConnected(true)

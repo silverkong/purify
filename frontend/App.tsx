@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Route, Routes } from "react-router-dom"
 import logo from "./assets/dfinity.svg"
 import { createClient } from "@connect2ic/core"
 import { defaultProviders } from "@connect2ic/core/providers"
@@ -16,6 +17,7 @@ import { Purify } from "./components/Purify"
 
 // Pages
 import { Authenticator } from "./components/Authenticator"
+import Login from "./pages/Login"
 
 function App() {
   // const { isConnected, principal } = useConnect()
@@ -24,7 +26,7 @@ function App() {
   const [principal, setPrincipal] = useState("")
 
   return (
-    <div>
+    <main>
       {/* {isConnected && (
         <div>
           <div>Connected</div>
@@ -48,7 +50,10 @@ function App() {
           />
         </div>
       )}
-    </div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </main>
   )
 }
 
