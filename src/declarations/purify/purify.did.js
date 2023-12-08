@@ -9,6 +9,7 @@ export const idlFactory = ({ IDL }) => {
     'query_profile' : IDL.Func([IDL.Text], [IDL.Vec(IDL.Text)], []),
     'rate' : IDL.Func([IDL.Text, IDL.Text, IDL.Bool, IDL.Text], [IDL.Bool], []),
     'update_index' : IDL.Func([IDL.Text, IDL.Text, IDL.Nat], [IDL.Bool], []),
+    'update_profile' : IDL.Func([IDL.Text, IDL.Text, IDL.Nat], [IDL.Bool], []),
   });
 };
 export const init = ({ IDL }) => { return []; };

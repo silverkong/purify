@@ -11,4 +11,5 @@ export interface _SERVICE {
   'query_profile' : ActorMethod<[string], Array<string>>,
   'rate' : ActorMethod<[string, string, boolean, string], boolean>,
   'update_index' : ActorMethod<[string, string, bigint], boolean>,
+  'update_profile' : ActorMethod<[string, string, bigint], boolean>,
 }

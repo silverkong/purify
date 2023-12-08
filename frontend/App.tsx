@@ -12,11 +12,14 @@ import {
 // import "@connect2ic/core/style.css"
 import * as purify from "../.dfx/local/canisters/purify"
 import * as authentication from "../.dfx/local/canisters/authentication"
-import * as friendTech from "../.dfx/local/canisters/httpOutcalls"
+import * as httpOutcalls from "../.dfx/local/canisters/httpOutcalls"
 import { Purify } from "./components/Purify"
 
 // Pages
 import { Authenticator } from "./components/Authenticator"
+
+// SocialQuery
+import { SocialQuery } from "./components/SocialQuery"
 
 function App() {
   // const { isConnected, principal } = useConnect()
@@ -49,6 +52,9 @@ function App() {
           />
         </div>
       )}
+      <div>
+        <SocialQuery />
+      </div>
     </div>
   )
 }
@@ -57,7 +63,7 @@ const client = createClient({
   canisters: {
     purify,
     authentication,
-    friendTech,
+    httpOutcalls,
   },
   providers: defaultProviders,
   globalProviderConfig: {

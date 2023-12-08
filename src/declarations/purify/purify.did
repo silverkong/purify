@@ -12,4 +12,5 @@ service : {
   query_profile: (text) -> (vec text);
   rate: (text, text, bool, text) -> (bool);
   update_index: (text, text, nat) -> (bool);
+  update_profile: (text, text, nat) -> (bool);
 }
