@@ -18,6 +18,7 @@ import { Purify } from "./components/Purify"
 // Pages
 import { Authenticator } from "./components/Authenticator"
 import Login from "./pages/Login"
+        import CreateOTP from '../frontend/pages/CreateOTP'; 
 
 function App() {
   // const { isConnected, principal } = useConnect()
@@ -52,6 +53,7 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/createOTP" element={<CreateOTP />} />
       </Routes>
     </main>
   )

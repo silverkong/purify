@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Audiowide&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  color: var(--color-black);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+:root {
+  /* color */
+  --color-primary: #0066ff;
+  --color-white: #ffffff;
+  --color-black: #444444;
+  --color-gray: #999999;
+}
