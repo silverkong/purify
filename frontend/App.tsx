@@ -12,6 +12,7 @@ import {
 // import "@connect2ic/core/style.css"
 import * as purify from "../.dfx/local/canisters/purify"
 import * as authentication from "../.dfx/local/canisters/authentication"
+import * as friendTech from "../.dfx/local/canisters/httpOutcalls"
 import { Purify } from "./components/Purify"
 
 // Pages
@@ -56,6 +57,7 @@ const client = createClient({
   canisters: {
     purify,
     authentication,
+    friendTech,
   },
   providers: defaultProviders,
   globalProviderConfig: {

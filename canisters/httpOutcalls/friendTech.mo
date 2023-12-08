@@ -52,7 +52,7 @@ actor {
       transformed;
   };
   
-  public func get_icp_usd_exchange(address: Text) : async Text {
+  public func queryFriendTech(address: Text) : async Text {
 
     //1. DECLARE IC MANAGEMENT CANISTER
     //We need this so we can use it to make the HTTP request
@@ -61,10 +61,6 @@ actor {
     //2. SETUP ARGUMENTS FOR HTTP GET request
 
     // 2.1 Setup the URL and its query parameters
-    let ONE_MINUTE : Nat64 = 60;
-    let start_timestamp : Types.Timestamp = 1682978460; //May 1, 2023 22:01:00 GMT
-    let end_timestamp : Types.Timestamp = 1682978520;//May 1, 2023 22:02:00 GMT
-    let host : Text = "api.pro.coinbase.com";
     // let url = "https://" # host # "/products/ICP-USD/candles?start=" # Nat64.toText(start_timestamp) # "&end=" # Nat64.toText(start_timestamp) # "&granularity=" # Nat64.toText(ONE_MINUTE);
     let url = "https://prod-api.kosetto.com/users/" # address;
 
