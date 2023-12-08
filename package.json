@@ -1,5 +1,5 @@
 {
-  "name": "social-valley-icp",
+  "name": "purify",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,7 @@
     "@dfinity/agent": "^0.11.3",
     "@web3modal/wagmi": "^3.4.0",
     "viem": "^1.19.11",
-    "wagmi": "^1.4.10"
+    "wagmi": "^1.4.10",
     "@otplib/preset-browser": "^12.0.1",
     "otplib": "^12.0.1",
     "qrcode": "^1.5.3",
