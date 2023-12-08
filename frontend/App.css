@@ -13,11 +13,6 @@
   font-weight: 400;
 }
 
-main {
-  width: 270px;
-  height: 450px;
-}
-
 :root {
   /* color */
   --color-primary: #0066ff;

@@ -1,12 +1,14 @@
 import "./App.css";
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import React from 'react';
+import CreateOTP from '../frontend/pages/CreateOTP'; 
 
 function App() {
   return (
     <main>
-fsdfdsfds
+      <Routes>
+        <Route path="/createOTP" element={<CreateOTP />} />
+      </Routes>
     </main>
   );
 }
