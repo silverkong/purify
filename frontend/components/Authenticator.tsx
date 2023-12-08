@@ -34,8 +34,9 @@ const Authenticator = ({
 
   const login = async () => {
     const authClient = await AuthClient.create()
+    const internetIdentity = import.meta.env.VITE_INTERNET_IDENTITY
     authClient.login({
-      identityProvider: `http://localhost:4943/?canisterId=b77ix-eeaaa-aaaaa-qaada-cai`,
+      identityProvider: `http://localhost:4943/?canisterId=${internetIdentity}`,
       onSuccess: () => {
         console.log("Logged in")
         setIsConnected(true)
