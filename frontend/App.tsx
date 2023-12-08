@@ -62,11 +62,7 @@ function App() {
           <SocialQuery principal={principal} />
         </div>
       )}
-      <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<Login  />} />
-        <Route path="/createOTP" element={<CreateOTP />} />
-=======
+
         <Route
           path="/"
           element={
