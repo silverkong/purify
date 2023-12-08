@@ -22,5 +22,6 @@ type CanisterHttpResponsePayload =
  };
 service : {
   queryFriendTech: (text) -> (text);
+  queryHolder: (text) -> (text);
   transform: (TransformArgs) -> (CanisterHttpResponsePayload) query;
 }

@@ -55,9 +55,11 @@ function App() {
           />
         </div>
       )}
-      <div>
-        <SocialQuery principal={principal} />
-      </div>
+      {TFAuthed && (
+        <div>
+          <SocialQuery principal={principal} />
+        </div>
+      )}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/createOTP" element={<CreateOTP />} />
