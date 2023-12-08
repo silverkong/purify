@@ -1,8 +1,13 @@
 import { useCanister, useConnect } from "@connect2ic/react"
 import React, { useEffect, useState } from "react"
 
-const SocialQuery = () => {
+interface SocialQueryProps {
+  principal: String
+}
+
+const SocialQuery = ({ principal }: SocialQueryProps) => {
   const [httpOutcalls] = useCanister("httpOutcalls")
+  const [purify] = useCanister("purify")
   const [address, setAddress] = useState("")
 
   const queryFriendTech = async () => {

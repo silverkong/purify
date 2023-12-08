@@ -53,7 +53,7 @@ function App() {
         </div>
       )}
       <div>
-        <SocialQuery />
+        <SocialQuery principal={principal} />
       </div>
     </div>
   )
