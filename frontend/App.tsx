@@ -62,7 +62,17 @@ function App() {
         </div>
       )}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <Login
+              TFAuthed={TFAuthed}
+              setTFAAuthed={setTFAAuthed}
+              principal={principal}
+              setPrincipal={setPrincipal}
+            />
+          }
+        />
         <Route path="/createOTP" element={<CreateOTP />} />
         <Route path="/profile" element={<Profile principal={principal} />} />
       </Routes>
