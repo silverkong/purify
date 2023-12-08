@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Route, Routes } from "react-router-dom"
 import logo from "./assets/dfinity.svg"
 import { createClient } from "@connect2ic/core"
 import { defaultProviders } from "@connect2ic/core/providers"
@@ -17,6 +18,8 @@ import { Purify } from "./components/Purify"
 
 // Pages
 import { Authenticator } from "./components/Authenticator"
+import Login from "./pages/Login"
+        import CreateOTP from '../frontend/pages/CreateOTP'; 
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
@@ -28,7 +31,7 @@ function App() {
   const [principal, setPrincipal] = useState("")
 
   return (
-    <div>
+    <main>
       {/* {isConnected && (
         <div>
           <div>Connected</div>
@@ -56,6 +59,11 @@ function App() {
         <SocialQuery principal={principal} />
       </div>
     </div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/createOTP" element={<CreateOTP />} />
+      </Routes>
+    </main>
   )
 }
 

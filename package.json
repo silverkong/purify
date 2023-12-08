@@ -1,5 +1,5 @@
 {
-  "name": "social-valley-icp",
+  "name": "purify",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -10,11 +10,15 @@
     "@connect2ic/core": "^0.1.1",
     "@connect2ic/react": "^0.1.0",
     "@dfinity/agent": "^0.11.3",
+    "@web3modal/wagmi": "^3.4.0",
+    "viem": "^1.19.11",
+    "wagmi": "^1.4.10",
     "@otplib/preset-browser": "^12.0.1",
     "otplib": "^12.0.1",
     "qrcode": "^1.5.3",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.36",
