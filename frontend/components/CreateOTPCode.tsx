@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import '../styles/center.css'; 
 import { Link } from 'react-router-dom'; 
-
+import qrcode from "qrcode"
+import { useCanister } from '@connect2ic/react';
+import {authenticator as auth }from "@otplib/preset-browser"
 const nicknameStyle = { 
     color: '#444', 
     fontFamily: 'Poppins',
@@ -33,12 +35,47 @@ const bgStyle = {
   background: '#D9D9D9', 
   marginTop:'2.5rem'
 }
+interface CreateORPCodeProps {
+  principal: string;
+}
+const CreateOTPCode = ({principal}:CreateORPCodeProps) => {
 
-const CreateOTPCode = () => {
+  const[authentication] = useCanister("authentication")
+  const [qr, setQr] = useState("");
+  useEffect(() => {
+    createQr();
+  },[]);
+  const createQr = async () => {
+    console.log('useEffect Check!');
+
+    console.log("Start google authenticator")
+    const user = "username"
+    const service = "Purify"
+    const secret = auth.generateSecret()
+
+    // 시크릿 저장
+    console.log("secret", secret)
+    const secretHashRes = await authentication.update_secretHash(
+      principal,
+      secret,
+    )
+    console.log("secretHash updated", secretHashRes)
+
+    // QR 생성
+    const otpauth = auth.keyuri(user, service, secret)
+    qrcode.toDataURL(otpauth, (err, imageUrl) => {
+      if (err) {
+        console.log("Error with QR")
+        return
+      }
+      console.log(imageUrl)
+      setQr(imageUrl)
+    })
+  }
   return (
     <div className='center'>
        <p style={nicknameStyle}>Create OTP Code</p>
-        <div style={bgStyle}/>
+        <div style={bgStyle}/> {/* QR코드 나타는 곳 */}
         <Link to="/verifyOTP">
           <button style={buttonStyle}>verify OTP</button>
         </Link>

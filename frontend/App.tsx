@@ -61,7 +61,7 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/createOTP" element={<CreateOTP />} />
+        <Route path="/createOTP" element={<CreateOTP principal={principal} />} />
         <Route path="/verifyOTP" element={<VerifyOTP />} />
       </Routes>
     </main>
