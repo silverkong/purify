@@ -21,6 +21,6 @@ type CanisterHttpResponsePayload =
    status: nat;
  };
 service : {
-  get_icp_usd_exchange: (text) -> (text);
+  queryFriendTech: (text) -> (text);
   transform: (TransformArgs) -> (CanisterHttpResponsePayload) query;
 }

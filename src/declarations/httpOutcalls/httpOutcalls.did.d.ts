@@ -17,6 +17,6 @@ export interface TransformArgs {
   'response' : HttpResponsePayload,
 }
 export interface _SERVICE {
-  'get_icp_usd_exchange' : ActorMethod<[string], string>,
+  'queryFriendTech' : ActorMethod<[string], string>,
   'transform' : ActorMethod<[TransformArgs], CanisterHttpResponsePayload>,
 }

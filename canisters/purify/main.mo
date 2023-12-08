@@ -13,6 +13,8 @@ actor Purify {
         // 타입 정의
         type Profile = {
           principal: Text;
+          var name: Text;
+          var profile_pic: Text;
           var plus: Int;
           var minus: Int;
           var vely_points: Int;
@@ -40,6 +42,8 @@ actor Purify {
 
             let new_profile: Profile = {
                 principal = principal;
+                var name = "unnamed";
+                var profile_pic = "";
                 var plus = 0;
                 var minus = 0;
                 var vely_points = 0;
@@ -125,6 +129,32 @@ actor Purify {
             return true;
         };
 
+        // 프로파일 수정
+        public func update_profile(principal: Text, info : Text, switcher : Nat) : async Bool {
+            var profile = switch (principalToProfile.get(Principal.fromText(principal))) {
+                case null {
+                    return false;
+                };
+                case (?profile) {
+                    profile;
+                };
+            };
+
+            switch (switcher) {
+                case 0 {
+                    profile.name := info;
+                };
+                case 1 {
+                    profile.profile_pic := info;
+                };
+                case _ {
+                    return false;
+                };
+            };
+
+            return true;
+        };
+
         // 프로파일 쿼리
         public func query_profile(principal: Text) : async [Text] {
             let profile = switch (principalToProfile.get(Principal.fromText(principal))) {
@@ -136,7 +166,7 @@ actor Purify {
                 };
             };
 
-            return [profile.principal, Int.toText(profile.plus), Int.toText(profile.minus), Int.toText(profile.vely_points)];
+            return [profile.principal, profile.name, profile.profile_pic, Int.toText(profile.plus), Int.toText(profile.minus), Int.toText(profile.vely_points)];
         };
 
         // 댓글 쿼리

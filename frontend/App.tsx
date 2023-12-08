@@ -13,12 +13,16 @@ import {
 // import "@connect2ic/core/style.css"
 import * as purify from "../.dfx/local/canisters/purify"
 import * as authentication from "../.dfx/local/canisters/authentication"
+import * as httpOutcalls from "../.dfx/local/canisters/httpOutcalls"
 import { Purify } from "./components/Purify"
 
 // Pages
 import { Authenticator } from "./components/Authenticator"
 import Login from "./pages/Login"
         import CreateOTP from '../frontend/pages/CreateOTP'; 
+
+// SocialQuery
+import { SocialQuery } from "./components/SocialQuery"
 
 function App() {
   // const { isConnected, principal } = useConnect()
@@ -51,6 +55,10 @@ function App() {
           />
         </div>
       )}
+      <div>
+        <SocialQuery principal={principal} />
+      </div>
+    </div>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/createOTP" element={<CreateOTP />} />
@@ -63,6 +71,7 @@ const client = createClient({
   canisters: {
     purify,
     authentication,
+    httpOutcalls,
   },
   providers: defaultProviders,
   globalProviderConfig: {
