@@ -20,6 +20,7 @@ import { Purify } from "./components/Purify"
 import { Authenticator } from "./components/Authenticator"
 import Login from "./pages/Login"
 import CreateOTP from "../frontend/pages/CreateOTP"
+import VerifyOTP from './pages/VerifyOTP'
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
@@ -62,8 +63,24 @@ function App() {
         </div>
       )}
       <Routes>
+<<<<<<< HEAD
         <Route path="/" element={<Login  />} />
         <Route path="/createOTP" element={<CreateOTP />} />
+=======
+        <Route
+          path="/"
+          element={
+            <Login
+              TFAuthed={TFAuthed}
+              setTFAAuthed={setTFAAuthed}
+              principal={principal}
+              setPrincipal={setPrincipal}
+            />
+          }
+        />
+        <Route path="/createOTP" element={<CreateOTP principal={principal} />} />
+        <Route path="/verifyOTP" element={<VerifyOTP />} />
+>>>>>>> 92469038a466c285d7e42cb6ef503635846d48bd
         <Route path="/profile" element={<Profile principal={principal} />} />
       </Routes>
     </main>
