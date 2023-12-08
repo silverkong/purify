@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/center.css'; 
+import { Link } from 'react-router-dom'; 
 
 const nicknameStyle = { 
     color: '#444', 
@@ -8,16 +9,6 @@ const nicknameStyle = {
     fontStyle: 'normal',
     fontWeight: '500',
     lineHeight: '1.875rem'
-}
-
-const inputStyle = { 
-    width: '18.75rem',
-    height: '4.375rem',
-    flexShrink: '0', 
-    borderRadius: '1.5625rem',
-    border: '1px solid #DDD',
-    background: '#FFF', 
-    marginTop:'1.88rem'
 }
 
 const buttonStyle = { 
@@ -35,14 +26,24 @@ const buttonStyle = {
     marginTop:'2.5rem'
 }
 
-const SetNickname = () => {
+const bgStyle = { 
+  width: '18.75rem',
+  height: '18.75rem',
+  flexShrink: '0',
+  background: '#D9D9D9', 
+  marginTop:'2.5rem'
+}
+
+const CreateVerifyCode = () => {
   return (
     <div className='center'>
-       <p style={nicknameStyle}>Set Nickname</p>
-       <input style={inputStyle}/>
-       <button style={buttonStyle}>set nickname</button>
+       <p style={nicknameStyle}>Create OTP Code</p>
+        <div style={bgStyle}/> {/* QR코드 나타는 곳 */}
+        <Link to="/verifyOTP">
+          <button style={buttonStyle}>verify OTP</button>
+        </Link>
     </div>
   );
 };
 
-export default SetNickname;
+export default CreateVerifyCode;
