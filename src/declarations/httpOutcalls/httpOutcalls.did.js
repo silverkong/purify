@@ -16,6 +16,7 @@ export const idlFactory = ({ IDL }) => {
   });
   return IDL.Service({
     'queryFriendTech' : IDL.Func([IDL.Text], [IDL.Text], []),
+    'queryHolder' : IDL.Func([IDL.Text], [IDL.Text], []),
     'transform' : IDL.Func(
         [TransformArgs],
         [CanisterHttpResponsePayload],
