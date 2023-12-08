@@ -1,7 +1,14 @@
-import { useCanister } from "@connect2ic/react"
-import Logo from "../components/Logo"
-import React, { useEffect, useState } from "react"
 import styles from "../styles/Profile.module.css"
+import React, { useEffect, useState } from "react"
+import { useCanister } from "@connect2ic/react"
+// components
+import Logo from "../components/Logo"
+import ProfileTop from "../components/ProfileTop"
+import ProfileBottomButton from "../components/ProfileBottomButton"
+import ListSocialHolding from "../components/ListSocialHolding"
+import ListSocialConnected from "../components/ListSocialConnected"
+import SocialConnect from "../components/SocialConnect"
+
 const baseURL = "https://base.llamarpc.com/"
 interface ProfileProps {
   principal: string
@@ -23,41 +30,33 @@ export default function Profile({ principal }: ProfileProps) {
     console.log(index)
     setIndex(index)
   }
+
   return (
     <div className="">
       <Logo />
-      <section className={styles.section_profile_top}>
-        <div className={styles.box_profile_img}>프로필 이미지</div>
-        <div className={styles.box_profile_info}>
-          <div className={styles.box_profile_info_top}>
-            <h2>unnamed</h2>
-            <span>icp id</span>
-          </div>
-          <div className={styles.box_profile_info_bottom}>
-            <h1>0</h1>
-            <span>point</span>
-          </div>
-        </div>
-      </section>
+      <ProfileTop />
       <section className={styles.section_profile_bottom_title}>
-        <button
+        <ProfileBottomButton
           className={holding ? "" : styles.btn_profile_bottom_active}
+          content="connected social"
           onClick={() => setHolding(false)}
-        >
-          connected social
-        </button>
-        <button
+        />
+        <ProfileBottomButton
           className={holding ? styles.btn_profile_bottom_active : ""}
+          content="holding"
           onClick={() => setHolding(true)}
-        >
-          holding
-        </button>
+        />
       </section>
       <section>
         {holding ? (
-          <section className={styles.section_holding}></section>
+          <section className={styles.section_holding}>
+            <ListSocialHolding onClick={() => {}} />
+          </section>
         ) : (
-          <section className={styles.section_connected_social}></section>
+          <section className={styles.section_connected_social}>
+            <ListSocialConnected onClick={() => {}} />
+            <SocialConnect onClick={() => {}} />
+          </section>
         )}
       </section>
     </div>
