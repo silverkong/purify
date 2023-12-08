@@ -1,6 +1,7 @@
 import styles from "../styles/Profile.module.css"
 import React, { useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
+import { useDisconnect } from "wagmi"
 // components
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
@@ -18,7 +19,7 @@ export default function Profile({ principal }: ProfileProps) {
   const [holding, setHolding] = useState(false)
   const [index, setIndex] = useState(null)
   const [connected, setConnected] = useState([])
-
+  const { disconnect } = useDisconnect()
   useEffect(() => {
     queryIndex()
   }, [connected])
@@ -50,12 +51,16 @@ export default function Profile({ principal }: ProfileProps) {
       <section>
         {holding ? (
           <section className={styles.section_holding}>
-            <ListSocialHolding onClick={() => {}} />
+            <ListSocialHolding onClick={disconnect} />
+            <ListSocialHolding onClick={disconnect} />
+            <ListSocialHolding onClick={disconnect} />
+            <ListSocialHolding onClick={disconnect} />
+            <ListSocialHolding onClick={disconnect} />
           </section>
         ) : (
           <section className={styles.section_connected_social}>
-            <ListSocialConnected onClick={() => {}} />
-            <SocialConnect onClick={() => {}} />
+            <ListSocialConnected onClick={disconnect} />
+            <SocialConnect onClick={disconnect} />
           </section>
         )}
       </section>
