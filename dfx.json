@@ -5,15 +5,11 @@
       "type": "motoko"
     },
     "assets": {
-      "dependencies": [
-        "counter"
-      ],
+      "dependencies": ["counter"],
       "frontend": {
         "entrypoint": "dist/index.html"
       },
-      "source": [
-        "dist/"
-      ],
+      "source": ["dist/"],
       "type": "assets"
     }
   },
@@ -24,13 +20,11 @@
   },
   "networks": {
     "local": {
-      "bind": "127.0.0.1:8000",
+      "bind": "127.0.0.1:4943",
       "type": "ephemeral"
     },
     "ic": {
-      "providers": [
-        "https://mainnet.dfinity.network"
-      ],
+      "providers": ["https://mainnet.dfinity.network"],
       "type": "persistent"
     }
   },
