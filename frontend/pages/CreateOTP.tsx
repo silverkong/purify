@@ -1,12 +1,12 @@
-import React from 'react';
-import Logo from '../components/Logo'; 
-import CreateOTPCode from '../components/CreateOTPCode'; 
+import React from "react"
+import Logo from "../components/Logo"
+import CreateOTPCode from "../components/CreateOTPCode"
 
-const CreateOTP = () => {
+const CreateOTP = ({ principal }) => {
   return (
     <div>
-        <Logo/>
-        <CreateOTPCode/>
+      <Logo />
+      <CreateOTPCode principal={principal} />
     </div>
   )
 }

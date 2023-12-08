@@ -111,6 +111,8 @@ const Authenticator = ({
     const secret = await authentication.query_secretHash(principal)
 
     try {
+      console.log("token", token)
+      console.log("secret", secret)
       const isValid = a.verify({ token, secret })
       console.log("AUTH RESULT", isValid)
       setTFAAuthed(isValid)
