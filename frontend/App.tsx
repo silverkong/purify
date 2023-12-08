@@ -23,6 +23,7 @@ import CreateOTP from "../frontend/pages/CreateOTP"
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
+import Profile from "./pages/Profile"
 
 function App() {
   // const { isConnected, principal } = useConnect()
@@ -63,6 +64,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/createOTP" element={<CreateOTP />} />
+        <Route path="/profile" element={<Profile principal={principal} />} />
       </Routes>
     </main>
   )
