@@ -1,54 +1,61 @@
-import React from "react"
+import React, { useState } from "react"
 import logo from "./assets/dfinity.svg"
-/*
- * Connect2ic provides essential utilities for IC app development
- */
 import { createClient } from "@connect2ic/core"
 import { defaultProviders } from "@connect2ic/core/providers"
-import { ConnectButton, ConnectDialog, Connect2ICProvider } from "@connect2ic/react"
-import "@connect2ic/core/style.css"
-/*
- * Import canister definitions like this:
- */
-import * as counter from "../.dfx/local/canisters/counter"
-/*
- * Some examples to get you started
- */
-import { Counter } from "./components/Counter"
-import { Transfer } from "./components/Transfer"
-import { Profile } from "./components/Profile"
+import {
+  ConnectButton,
+  ConnectDialog,
+  Connect2ICProvider,
+  useConnect,
+  useCanister,
+} from "@connect2ic/react"
+// import "@connect2ic/core/style.css"
+import * as purify from "../.dfx/local/canisters/purify"
+import * as authentication from "../.dfx/local/canisters/authentication"
+import { Purify } from "./components/Purify"
+
+// Pages
+import { Authenticator } from "./components/Authenticator"
 
 function App() {
+  // const { isConnected, principal } = useConnect()
+
+  const [TFAuthed, setTFAAuthed] = useState(false)
+  const [principal, setPrincipal] = useState("")
+
   return (
-    <div className="App">
-      <div className="auth-section">
+    <div>
+      {/* {isConnected && (
+        <div>
+          <div>Connected</div>
+          <div>{principal}</div>
+        </div>
+      )} */}
+      {/* <div>
         <ConnectButton />
+      </div> */}
+      {/* <ConnectDialog /> */}
+      <div>
+        <Purify TFAuthed={TFAuthed} principal={principal} />
       </div>
-      <ConnectDialog />
-
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="slogan">
-          React+TypeScript Template
-        </p>
-        <p className="twitter">by <a href="https://twitter.com/miamaruq">@miamaruq</a></p>
-      </header>
-
-      <p className="examples-title">
-        Examples
-      </p>
-      <div className="examples">
-        <Counter />
-        <Profile />
-        <Transfer />
-      </div>
+      {!TFAuthed && (
+        <div>
+          <Authenticator
+            TFAuthed={TFAuthed}
+            setTFAAuthed={setTFAAuthed}
+            principal={principal}
+            setPrincipal={setPrincipal}
+          />
+        </div>
+      )}
     </div>
   )
 }
 
 const client = createClient({
   canisters: {
-    counter,
+    purify,
+    authentication,
   },
   providers: defaultProviders,
   globalProviderConfig: {
