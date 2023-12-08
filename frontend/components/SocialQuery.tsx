@@ -19,6 +19,9 @@ const SocialQuery = ({ principal }: SocialQueryProps) => {
       if (!res) return
       const jsonRes = JSON.parse(res as string)
       console.log("success!", jsonRes)
+      await purify.update_profile(principal, jsonRes.twitterName, 0)
+      await purify.update_profile(principal, jsonRes.twitterPfpUrl, 1)
+      console.log("updated profile")
     } catch (err) {
       console.log("error!", err)
     }

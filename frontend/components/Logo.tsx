@@ -10,7 +10,7 @@ const headerStyle = {
 }
 
 const logoStyle = {
-  marginLeft: "15%",
+  marginLeft: "200px",
   marginTop: "1.88rem",
 }
 const Logo = () => {

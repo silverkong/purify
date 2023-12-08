@@ -52,7 +52,7 @@ const Authenticator = ({
       identity.getPrincipal().toString(),
     )
     if (res) {
-      setTFRegistered(true)
+      // setTFRegistered(true)
     }
   }
 
@@ -62,7 +62,7 @@ const Authenticator = ({
     if (res) {
       console.log("Secret already provided", res)
       setTFRegistered(true)
-      return
+      // return
     }
 
     console.log("Start google authenticator")

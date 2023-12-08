@@ -70,4 +70,40 @@ actor {
     decoded_text
   };
 
+  public func queryHolder(address: Text) : async Text {
+
+    let ic : Types.IC = actor ("aaaaa-aa");
+    // Friend Tech 홀딩 정보 쿼리
+    let url = "https://friend-tech.p.rapidapi.com/users/" # address # "/token/holders";
+
+    let request_headers = [
+        { name = "X-RapidAPI-Key"; value = "bb15b5f23cmsh3f751f445c9fa10p11509ajsn8651c94b9d90" },
+        { name = "X-RapidAPI-Host"; value = "friend-tech.p.rapidapi.com" },
+    ];
+
+    let transform_context : Types.TransformContext = {
+      function = transform;
+      context = Blob.fromArray([]);
+    };
+
+    let http_request : Types.HttpRequestArgs = {
+        url = url;
+        max_response_bytes = null;
+        headers = request_headers;
+        body = null;
+        method = #get;
+        transform = ?transform_context;
+    };
+
+    Cycles.add(50_000_000_000);
+    
+    let http_response : Types.HttpResponsePayload = await ic.http_request(http_request);
+    let response_body: Blob = Blob.fromArray(http_response.body);
+    let decoded_text: Text = switch (Text.decodeUtf8(response_body)) {
+        case (null) { "No value returned" };
+        case (?y) { y };
+    };
+    decoded_text
+  };
+
 };

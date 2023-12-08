@@ -24,6 +24,7 @@ import VerifyOTP from './pages/VerifyOTP'
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
+import Profile from "./pages/Profile"
 
 function App() {
   // const { isConnected, principal } = useConnect()
@@ -56,13 +57,16 @@ function App() {
           />
         </div>
       )}
-      <div>
-        <SocialQuery principal={principal} />
-      </div>
+      {TFAuthed && (
+        <div>
+          <SocialQuery principal={principal} />
+        </div>
+      )}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/createOTP" element={<CreateOTP principal={principal} />} />
         <Route path="/verifyOTP" element={<VerifyOTP />} />
+        <Route path="/profile" element={<Profile principal={principal} />} />
       </Routes>
     </main>
   )

@@ -8,7 +8,7 @@ const CreateOTP = () => {
         <Logo/>
         <CreateOTPCode/>
     </div>
-  );
-};
+  )
+}
 
-export default CreateOTP;
+export default CreateOTP

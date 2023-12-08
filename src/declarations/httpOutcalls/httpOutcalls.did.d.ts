@@ -18,5 +18,6 @@ export interface TransformArgs {
 }
 export interface _SERVICE {
   'queryFriendTech' : ActorMethod<[string], string>,
+  'queryHolder' : ActorMethod<[string], string>,
   'transform' : ActorMethod<[TransformArgs], CanisterHttpResponsePayload>,
 }

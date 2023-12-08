@@ -90,10 +90,12 @@ const Purify = ({ TFAuthed, principal }: PurifyProps) => {
               {profile && (
                 <div>
                   <div>Profile</div>
-                  <div>Principal: {profile[0]}</div>
-                  <div>Plus: {profile[1]}</div>
-                  <div>Minus: {profile[2]}</div>
-                  <div>Vely Points: {profile[3]}</div>
+                  <div>Name: {profile[0]}</div>
+                  <div>Profile_pic: {profile[1]}</div>
+                  <div>Principal: {profile[2]}</div>
+                  <div>Plus: {profile[3]}</div>
+                  <div>Minus: {profile[4]}</div>
+                  <div>Vely Points: {profile[5]}</div>
                   {comments &&
                     comments.map((comment) => (
                       <div>
