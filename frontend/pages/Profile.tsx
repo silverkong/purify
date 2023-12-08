@@ -40,10 +40,26 @@ export default function Profile({ principal }: ProfileProps) {
         </div>
       </section>
       <section className={styles.section_profile_bottom_title}>
-        <button onClick={() => setHolding(false)}>connected social</button>
-        <button onClick={() => setHolding(true)}>holding</button>
+        <button
+          className={holding ? "" : styles.btn_profile_bottom_active}
+          onClick={() => setHolding(false)}
+        >
+          connected social
+        </button>
+        <button
+          className={holding ? styles.btn_profile_bottom_active : ""}
+          onClick={() => setHolding(true)}
+        >
+          holding
+        </button>
       </section>
-      <div>{holding ? <div></div> : <div></div>}</div>
+      <section>
+        {holding ? (
+          <section className={styles.section_holding}></section>
+        ) : (
+          <section className={styles.section_connected_social}></section>
+        )}
+      </section>
     </div>
   )
 }

@@ -60,7 +60,13 @@
 
 .section_profile_bottom_title > button {
   width: fit-content;
-  height: 40px;
+  margin-right: 50px;
+  padding: 20px 0;
   background: none;
+  color: var(--color-gray);
   cursor: pointer;
+}
+
+.section_profile_bottom_title > button.btn_profile_bottom_active {
+  color: var(--color-black);
 }
