@@ -20,6 +20,7 @@ import { Purify } from "./components/Purify"
 import { Authenticator } from "./components/Authenticator"
 import Login from "./pages/Login"
 import CreateOTP from "../frontend/pages/CreateOTP"
+import VerifyOTP from './pages/VerifyOTP'
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
@@ -61,6 +62,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/createOTP" element={<CreateOTP />} />
+        <Route path="/verifyOTP" element={<VerifyOTP />} />
       </Routes>
     </main>
   )

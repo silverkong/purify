@@ -1,12 +1,12 @@
 import React from 'react';
 import Logo from '../components/Logo'; 
-import SetNickname from '../components/SetNickname'; 
+import CreateOTPCode from '../components/CreateOTPCode'; 
 
 const CreateOTP = () => {
   return (
     <div>
         <Logo/>
-        <SetNickname/>
+        <CreateOTPCode/>
     </div>
   );
 };
