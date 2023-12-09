@@ -52,7 +52,7 @@ const inputStyle = {
   background: "#FFF",
   gap: "0.88rem",
   color: "#444",
-  textAlign: "center",
+  TextAlign: "center",
   fontFamily: "Poppins",
   fontSize: "2.1875rem",
   fontStyle: "normal",

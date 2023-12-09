@@ -10,6 +10,8 @@ import ListSocialHolding from "../components/ListSocialHolding"
 import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
 
+import { useAccount } from "wagmi"
+
 const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
 //   principal: string
@@ -28,15 +30,31 @@ export default function Profile({ principal }) {
 
   const [connected, setConnected] = useState([])
   const { disconnect } = useDisconnect()
-  const [address, setAddress] = useState("")
 
   // Name, PFP
   const [name, setName] = useState("")
+  const [pfp, setPfp] = useState("")
+  const [holdings, setHoldings] = useState<string[]>()
+
+  const { address, isConnected } = useAccount()
 
   useEffect(() => {
     queryIndex()
     queryProfile()
-  }, [connected])
+  }, [])
+
+  useEffect(() => {
+    if (isConnected) {
+      queryAll()
+    }
+  }, [isConnected])
+
+  const queryAll = async () => {
+    await queryFriendTech()
+    await queryHolder()
+    await queryIndex()
+    await queryProfile()
+  }
 
   const queryIndex = async () => {
     console.log("Querying index")
@@ -55,6 +73,7 @@ export default function Profile({ principal }) {
     setProfile(profile)
     setComments(comments)
     setName(profile[1])
+    setPfp(profile[2])
   }
 
   const queryFriendTech = async () => {
@@ -69,6 +88,24 @@ export default function Profile({ principal }) {
       setName(jsonRes.twitterName)
       await purify.update_profile(principal, jsonRes.twitterName, 0)
       await purify.update_profile(principal, jsonRes.twitterPfpUrl, 1)
+      await purify.update_index(principal, address, 0)
+      console.log("updated profile")
+    } catch (err) {
+      console.log("error!", err)
+    }
+  }
+
+  const queryHolder = async () => {
+    console.log("queryHolder")
+    console.log("address", address)
+    console.log("httpOutcalls", httpOutcalls)
+    try {
+      const res = await httpOutcalls.queryHolder(address)
+      if (!res) return
+      const jsonRes = JSON.parse(res as string)
+      const holdingsArr = Object.keys(jsonRes).map((key) => jsonRes[key])
+      setHoldings(holdingsArr)
+      console.log("success!", holdingsArr)
       console.log("updated profile")
     } catch (err) {
       console.log("error!", err)
@@ -78,7 +115,7 @@ export default function Profile({ principal }) {
   return (
     <div>
       <Logo />
-      <ProfileTop name={name} principal={principal} />
+      <ProfileTop name={name} pfp={pfp} principal={principal} />
       <section className={styles.section_profile_bottom_title}>
         <ProfileBottomButton
           className={holding ? "" : styles.btn_profile_bottom_active}
@@ -94,11 +131,7 @@ export default function Profile({ principal }) {
       <section>
         {holding ? (
           <section className={styles.section_holding}>
-            <ListSocialHolding onClick={disconnect} />
-            <ListSocialHolding onClick={disconnect} />
-            <ListSocialHolding onClick={disconnect} />
-            <ListSocialHolding onClick={disconnect} />
-            <ListSocialHolding onClick={disconnect} />
+            {holdings && holdings.map((holding) => <div>{holding}</div>)}
           </section>
         ) : (
           <section className={styles.section_connected_social}>
