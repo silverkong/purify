@@ -38,10 +38,10 @@ export default function Profile({ principal }) {
 
   const { address, isConnected } = useAccount()
 
-  useEffect(() => {
-    queryIndex()
-    queryProfile()
-  }, [])
+  // useEffect(() => {
+  //   queryIndex()
+  //   queryProfile()
+  // }, [])
 
   useEffect(() => {
     if (isConnected) {
@@ -101,7 +101,7 @@ export default function Profile({ principal }) {
     console.log("httpOutcalls", httpOutcalls)
     try {
       const res = await httpOutcalls.queryHolder(address)
-      if (!res) return
+      // if (!res) return
       const jsonRes = JSON.parse(res as string)
       const holdingsArr = Object.keys(jsonRes).map((key) => jsonRes[key])
       setHoldings(holdingsArr)
