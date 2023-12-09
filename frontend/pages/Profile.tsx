@@ -11,10 +11,10 @@ import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
 
 const baseURL = "https://base.llamarpc.com/"
-interface ProfileProps {
-  principal: string
-}
-export default function Profile({ principal }: ProfileProps) {
+// interface ProfileProps {
+//   principal: string
+// }
+export default function Profile({ principal }) {
   // Canisters
   const [httpOutcalls] = useCanister("httpOutcalls")
   const [purify] = useCanister("purify")
@@ -76,7 +76,7 @@ export default function Profile({ principal }: ProfileProps) {
   }
 
   return (
-    <div className="">
+    <div>
       <Logo />
       <ProfileTop name={name} principal={principal} />
       <section className={styles.section_profile_bottom_title}>

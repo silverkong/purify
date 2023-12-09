@@ -22,7 +22,7 @@ try {
       .toString(),
   )
 } catch (e) {
-    console.error("\n⚠️  Before starting the dev server run: dfx deploy\n\n")
+  console.error("\n⚠️  Before starting the dev server run: dfx deploy\n\n")
 }
 
 // List of all aliases for canisters
@@ -92,5 +92,21 @@ export default defineConfig({
     "process.env.NODE_ENV": JSON.stringify(
       isDev ? "development" : "production",
     ),
+  },
+  optimizeDeps: {
+    // 👈 optimizedeps
+    esbuildOptions: {
+      target: "esnext",
+      // Node.js global to browser globalThis
+      define: {
+        global: "globalThis",
+      },
+      supported: {
+        bigint: true,
+      },
+    },
+  },
+  build: {
+    target: ["esnext"], // 👈 build.target
   },
 })

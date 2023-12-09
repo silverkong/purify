@@ -25,19 +25,29 @@ import VerifyOTP from "./pages/VerifyOTP"
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
 import Profile from "./pages/Profile"
-import { InjectedConnector } from "wagmi/connectors/injected"
-import { WagmiConfig, configureChains, createConfig } from "wagmi"
-import { mainnet, base, arbitrum } from "viem/chains"
-import { createWeb3Modal } from "@web3modal/wagmi/react"
-import { publicProvider } from "wagmi/providers/public"
 
-// 1. Get projectId at https://cloud.walletconnect.com
-const projectId = import.meta.env.VITE_WALLET_PROJECT
+import { createWeb3Modal } from "@web3modal/wagmi/react"
+import { walletConnectProvider } from "@web3modal/wagmi"
+
+import { WagmiConfig, configureChains, createConfig } from "wagmi"
+import { publicProvider } from "wagmi/providers/public"
+import { polygon } from "wagmi/chains"
+import { InjectedConnector } from "wagmi/connectors/injected"
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect"
+import { alchemyProvider } from "wagmi/providers/alchemy"
+
+// 1. Get PROJECT_ID
+const projectId = import.meta.env.VITE_PROJECT_ID
+const apikey = import.meta.env.VITE_ALCHEMY_KEY
 
 // 2. Create wagmiConfig
 const { chains, publicClient } = configureChains(
-  [mainnet, base, arbitrum],
-  [publicProvider()],
+  [polygon],
+  [
+    walletConnectProvider({ projectId }),
+    publicProvider(),
+    alchemyProvider(apikey),
+  ],
 )
 
 const metadata = {
@@ -50,6 +60,10 @@ const metadata = {
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: [
+    new WalletConnectConnector({
+      chains,
+      options: { projectId, showQrModal: false, metadata },
+    }),
     new InjectedConnector({ chains, options: { shimDisconnect: true } }),
   ],
   publicClient,
@@ -57,6 +71,7 @@ const wagmiConfig = createConfig({
 
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
+
 function App() {
   // const { isConnected, principal } = useConnect()
 
@@ -65,7 +80,6 @@ function App() {
 
   return (
     <WagmiConfig config={wagmiConfig}>
-    <Routes>
       {/* {isConnected && (
         <div>
           <div>Connected</div>
@@ -94,7 +108,7 @@ function App() {
           <SocialQuery principal={principal} />
         </div>
       )}
-
+      <Routes>
         <Route
           path="/"
           element={
