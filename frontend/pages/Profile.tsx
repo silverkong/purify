@@ -50,30 +50,40 @@ export default function Profile({ principal }) {
   }, [isConnected])
 
   const queryAll = async () => {
-    await queryFriendTech()
-    await queryHolder()
     await queryIndex()
     await queryProfile()
+    await queryFriendTech()
+    await queryHolder()
   }
 
   const queryIndex = async () => {
     console.log("Querying index")
-    const index = await purify.query_index(principal)
+    const index = (await purify.query_index(principal)) as any[]
     console.log("Index queried")
     console.log(index)
-    setIndex(index)
+    if (index.length === 0) {
+      await purify.create_index(principal)
+      console.log("Index created")
+    } else {
+      setIndex(index)
+    }
   }
 
   const queryProfile = async () => {
     console.log("Querying profile")
-    const profile = await purify.query_profile(principal)
+    const profile = (await purify.query_profile(principal)) as any
     const comments = await purify.query_comments(principal)
     console.log("Profile queried")
     console.log(profile)
-    setProfile(profile)
-    setComments(comments)
-    setName(profile[1])
-    setPfp(profile[2])
+    if (profile.length === 0) {
+      await purify.create_profile(principal)
+      console.log("Profile created")
+    } else {
+      setProfile(profile)
+      setComments(comments)
+      setName(profile[1])
+      setPfp(profile[2])
+    }
   }
 
   const queryFriendTech = async () => {
