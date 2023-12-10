@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import React, { useRef, useState } from "react"
 import "../styles/center.css"
 import google from "../image/google.png"
+import Logo from "../components/Logo"
 
 import { authenticator as a } from "@otplib/preset-browser"
 
@@ -100,28 +101,30 @@ const VerifyOTP = ({ principal, setTFAAuthed }) => {
   }
 
   return (
-    <div className="center">
-      <p style={nicknameStyle}>Verify OTP Code</p>
-      <img src={google} style={imgStyle} />
-      <div style={inputBoxStyle}>
-        {inputRefs.map((ref, index) => (
-          <input
-            key={index}
-            ref={ref}
-            style={inputStyle}
-            type="text"
-            maxLength={1}
-            onChange={(e) => {
-              handleInputChange(index, e.target.value)
-              setToken(token + e.target.value)
-            }}
-          />
-        ))}
+    <div>
+      <Logo />
+      <div className="center">
+        <p style={nicknameStyle}>Verify OTP Code</p>
+        <img src={google} style={imgStyle} />
+        <div style={inputBoxStyle}>
+          {inputRefs.map((ref, index) => (
+            <input
+              key={index}
+              ref={ref}
+              style={inputStyle}
+              type="text"
+              maxLength={1}
+              onChange={(e) => {
+                handleInputChange(index, e.target.value)
+                setToken(token + e.target.value)
+              }}
+            />
+          ))}
+        </div>
+        <button style={buttonStyle} onClick={verifyAuthenticator}>
+          Verify OTP
+        </button>
       </div>
-
-      <button style={buttonStyle} onClick={verifyAuthenticator}>
-        Verify OTP
-      </button>
     </div>
   )
 }
