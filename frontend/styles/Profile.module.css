@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   height: 220px;
+  margin-top: 6.25rem;
   padding: 0 200px;
   background-color: var(--color-primary);
 }
@@ -95,16 +96,16 @@
   height: 100%;
 }
 
-.box_connected_social_list > .txt_social_name {
+.box_connected_social_list .txt_social_name {
   font-weight: 500;
   margin-right: 10px;
 }
 
-.box_connected_social_list > .txt_social_address {
+.box_connected_social_list .txt_social_address {
   color: var(--color-gray);
 }
 
-.box_connected_social_list > .btn_social_disconnect {
+.box_connected_social_list .btn_social_disconnect {
   width: 130px;
   margin-left: auto;
   padding: 12px 0;
