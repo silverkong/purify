@@ -123,7 +123,7 @@ export default function Comment({ principal }) {
       <Logo />
       <ProfileTop name={name} pfp={pfp} principal={principal} />
       <section className={styles.section_profile_bottom_title}>
-        <img src={message} />
+        <img src={message} className={styles.msgImg}/>
         <ProfileBottomButton
           className={holding ? "" : styles.btn_profile_bottom_active}
           content="Comment"
