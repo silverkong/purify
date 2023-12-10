@@ -57,6 +57,8 @@
   margin-top: 160px;
   padding: 0 200px;
   border-bottom: 1px solid var(--color-light-gray);
+  display: flex;
+  align-items: center;
 }
 
 .section_profile_bottom_title > button {
@@ -70,6 +72,10 @@
 
 .section_profile_bottom_title > button.btn_profile_bottom_active {
   color: var(--color-black);
+}
+
+.section_profile_bottom_title > img.msgImg {
+  margin-right: 0.62rem;
 }
 
 .box_connected_social_list {
