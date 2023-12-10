@@ -72,6 +72,9 @@ const wagmiConfig = createConfig({
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
+//4. (임시) comment 테스트용
+import Comment from "./pages/Comment";
+
 function App() {
   // const { isConnected, principal } = useConnect()
 
@@ -131,6 +134,8 @@ function App() {
           }
         />
         <Route path="/profile" element={<Profile principal={principal} />} />
+        <Route path="/comment" element={<Comment principal={principal}/>}/>
+        {/* comment Test용 url */}
       </Routes>
     </WagmiConfig>
   )
