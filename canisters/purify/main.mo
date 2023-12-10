@@ -26,6 +26,7 @@ actor Purify {
           var post_address: Text;
           var friend_tech: Text;
           var stars_address: Text;
+          var weight: Int;// weight for point calculation 
         };
 
         type Comment = {
@@ -61,6 +62,7 @@ actor Purify {
                 var post_address = "";
                 var friend_tech = "";
                 var stars_address = "";
+                var weight = 0;
             };
             principalToIndex.put(Principal.fromText(principal), new_index);
             return true;
@@ -82,14 +84,30 @@ actor Purify {
                 };
             };
 
+
+            var index = switch (principalToIndex.get(Principal.fromText(principal))) {
+                case null {
+                    return false;
+                };
+                case (?index) {
+                    index;
+                };
+            };
+            
             if (like) {
                 profile.plus += 1;
                 // 블리포인트 도출식
-                profile.vely_points := profile.plus - profile.minus;
+                profile.vely_points := index.weight * (profile.plus - profile.minus);
+                if(profile.vely_points < 0) {
+                    profile.vely_points := 0;
+                }
             } else {
                 profile.minus += 1;
                 // 플리포인트 도출식
-                profile.vely_points := profile.plus - profile.minus;
+                profile.vely_points := index.weight * (profile.plus - profile.minus);
+                if(profile.vely_points < 0) {
+                    profile.vely_points := 0;
+                }
             };
 
             profile.comments.add(new_comment);
@@ -108,18 +126,45 @@ actor Purify {
                 };
             };
 
+
             switch (switcher) {
                 case 0 {
-                    index.next_id := info;
+                    if(index.next_id == "") {
+                        index.weight := index.weight + 1;
+                    } else if(info == "") {
+                        index.weight := index.weight - 1;
+                    } else {
+                        index.next_id := info;
+                    }
                 };
                 case 1 {
-                    index.post_address := info;
+                    if(index.post_address == "") {
+                        index.weight := index.weight + 1;
+                    } else if(info == "") {
+                        index.weight := index.weight - 1;
+                    } else {
+                        index.post_address:= info;
+                    }
                 };
                 case 2 {
-                    index.friend_tech := info;
+                   
+                    if(index.friend_tech == "") {
+                        index.weight := index.weight + 1;
+                    } else if(info == "") {
+                        index.weight := index.weight - 1;
+                    } else {
+                        index.friend_tech:= info;
+                    }
                 };
                 case 3 {
-                    index.stars_address := info;
+                    
+                    if(index.stars_address == "") {
+                        index.weight := index.weight + 1;
+                    } else if(info == "") {
+                        index.weight := index.weight - 1;
+                    } else {
+                        index.stars_address:= info;
+                    }
                 };
                 case _ {
                     return false;

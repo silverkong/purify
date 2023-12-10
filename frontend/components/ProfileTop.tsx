@@ -13,15 +13,7 @@ const ProfileTop = ({ name, pfp, principal }) => {
       )}
       <div className={styles.box_profile_info}>
         <div className={styles.box_profile_info_top}>
-          {name === "" ? (
-            <div>
-              <h2>unnamed</h2>
-            </div>
-          ) : (
-            <div>
-              <h2>{name}</h2>
-            </div>
-          )}
+          {name === "" ? <h2>unnamed</h2> : <h2>{name}</h2>}
           <span>{principal}</span>
         </div>
         <div className={styles.box_profile_info_bottom}>
