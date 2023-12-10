@@ -31,7 +31,8 @@ export default function Profile({ principal, setPrincipal }) {
 
   const [connected, setConnected] = useState([])
   const { disconnect } = useDisconnect()
-  const { open } = useWeb3Modal()
+  // const {connect} = useConnect()
+  const { open:connect } = useWeb3Modal()
 
   // Name, PFP
   const [name, setName] = useState("")
@@ -166,7 +167,7 @@ export default function Profile({ principal, setPrincipal }) {
               index.map((address, key) => (
                 <ListSocialConnected key={key} address={address} disconnect={disconnect} />
               ))}
-            <SocialConnect open={open} />
+            <SocialConnect connect={connect} />
           </section>
         )}
       </section>

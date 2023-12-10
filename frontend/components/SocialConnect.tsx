@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../styles/Profile.module.css"
 import { useAccount } from "wagmi"
 
-const SocialConnect = ({ open }) => {
+const SocialConnect = ({ connect }) => {
   return (
     <div className={styles.box_connected_social_add}>
       <select name="social" className={styles.select_social}>
@@ -12,7 +12,7 @@ const SocialConnect = ({ open }) => {
         <option value="posttech">posttech</option>
         <option value="nextId">next id</option>
       </select>
-      <button className={styles.btn_social_connect} onClick={open}>
+      <button className={styles.btn_social_connect} onClick={connect}>
         connect
       </button>
     </div>
