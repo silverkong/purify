@@ -106,4 +106,37 @@ actor {
     decoded_text
   };
 
+  public func queryBio(address: Text) : async Text {
+
+    let ic : Types.IC = actor ("aaaaa-aa");
+    // Web3 Bio 통합 계정 쿼리
+    let url = "https://api.web3.bio/profile/" # address;
+
+    let request_headers = [];
+
+    let transform_context : Types.TransformContext = {
+      function = transform;
+      context = Blob.fromArray([]);
+    };
+
+    let http_request : Types.HttpRequestArgs = {
+        url = url;
+        max_response_bytes = null;
+        headers = request_headers;
+        body = null;
+        method = #get;
+        transform = ?transform_context;
+    };
+
+    Cycles.add(50_000_000_000);
+    
+    let http_response : Types.HttpResponsePayload = await ic.http_request(http_request);
+    let response_body: Blob = Blob.fromArray(http_response.body);
+    let decoded_text: Text = switch (Text.decodeUtf8(response_body)) {
+        case (null) { "No value returned" };
+        case (?y) { y };
+    };
+    decoded_text
+  };
+
 };

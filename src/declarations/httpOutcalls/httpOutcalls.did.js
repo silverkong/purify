@@ -15,6 +15,7 @@ export const idlFactory = ({ IDL }) => {
     'headers' : IDL.Vec(HttpHeader),
   });
   return IDL.Service({
+    'queryBio' : IDL.Func([IDL.Text], [IDL.Text], []),
     'queryFriendTech' : IDL.Func([IDL.Text], [IDL.Text], []),
     'queryHolder' : IDL.Func([IDL.Text], [IDL.Text], []),
     'transform' : IDL.Func(

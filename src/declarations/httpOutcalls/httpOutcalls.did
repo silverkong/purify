@@ -21,6 +21,7 @@ type CanisterHttpResponsePayload =
    status: nat;
  };
 service : {
+  queryBio: (text) -> (text);
   queryFriendTech: (text) -> (text);
   queryHolder: (text) -> (text);
   transform: (TransformArgs) -> (CanisterHttpResponsePayload) query;

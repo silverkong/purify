@@ -10,7 +10,7 @@
       "type": "motoko"
     },
     "httpOutcalls": {
-      "main": "canisters/httpOutcalls/friendTech.mo",
+      "main": "canisters/httpOutcalls/socialQuery.mo",
       "type": "motoko"
     },
     "assets": {

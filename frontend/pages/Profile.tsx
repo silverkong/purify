@@ -49,6 +49,10 @@ export default function Profile({ principal, setPrincipal }) {
     }
   }, [isConnected])
 
+  useEffect(() => {
+    queryAll()
+  }, [])
+
   const queryAll = async () => {
     await queryIndex()
     await queryProfile()
