@@ -99,7 +99,7 @@ const VerifyOTP = ({ principal, setTFAAuthed }) => {
       }
     }
   }
-//
+////
   return (
     <div>
       <Logo />
