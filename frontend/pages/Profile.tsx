@@ -1,7 +1,7 @@
 import styles from "../styles/Profile.module.css"
 import React, { useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
-import { useDisconnect } from "wagmi"
+import { useConnect, useDisconnect } from "wagmi"
 // components
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
@@ -11,6 +11,7 @@ import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
 
 import { useAccount } from "wagmi"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 
 const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
@@ -24,12 +25,13 @@ export default function Profile({ principal, setPrincipal }) {
   const [holding, setHolding] = useState(false)
 
   // Profile Query
-  const [index, setIndex] = useState(null)
+  const [index, setIndex] = useState<string[]>(null)
   const [profile, setProfile] = useState(null)
   const [comments, setComments] = useState(null)
 
   const [connected, setConnected] = useState([])
   const { disconnect } = useDisconnect()
+  const { open } = useWeb3Modal()
 
   // Name, PFP
   const [name, setName] = useState("")
@@ -160,8 +162,11 @@ export default function Profile({ principal, setPrincipal }) {
           </section>
         ) : (
           <section className={styles.section_connected_social}>
-            <ListSocialConnected onClick={disconnect} />
-            <SocialConnect onClick={disconnect} />
+            {index &&
+              index.map((address, key) => (
+                <ListSocialConnected key={key} address={address} disconnect={disconnect} />
+              ))}
+            <SocialConnect open={open} />
           </section>
         )}
       </section>
