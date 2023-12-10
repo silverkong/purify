@@ -25,7 +25,7 @@ const imgStyle = {
   marginLeft: "1.31rem",
 };
 
-const GoodBtn = () => {
+const GoodBtn = ({ isActive, onClick }) => {
   const [isBlueActive, setIsBlueActive] = useState(true);
 
   const handleClick = () => {
@@ -34,8 +34,8 @@ const GoodBtn = () => {
 
   return (
     <div>
-      <div style={isBlueActive ? blue : gray} onClick={handleClick}>
-        <img src={isBlueActive ? BlueLike : GrayLike} style={imgStyle} />
+      <div style={isActive ? blue : gray} onClick={onClick}>
+        <img src={isActive ? BlueLike : GrayLike} style={imgStyle} alt="GoodBtn" />
       </div>
     </div>
   );

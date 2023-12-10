@@ -5,8 +5,20 @@ import SendImg from "../image/send.png"
 
 const CommentInput = ({ onCommentSubmit }) => {
   const [isInputEmpty, setInputEmpty] = useState(true);
+  const [isGoodActive, setIsGoodActive] = useState(false);
+  const [isHateActive, setIsHateActive] = useState(false);
 
   const inputStyle = isInputEmpty ? inputStyleGray : inputStyleBlue;
+
+  const handleGoodClick = () => {
+    setIsGoodActive(true);
+    setIsHateActive(false); 
+  };
+
+  const handleHateClick = () => {
+    setIsHateActive(true);
+    setIsGoodActive(false);
+  };
   
   const btnStyle = isInputEmpty ? btnStyleGray : btnStyleBlue;
   const inputBoxStyle = { 
@@ -24,9 +36,9 @@ const CommentInput = ({ onCommentSubmit }) => {
 
   return (
     <div style={inputBoxStyle}>
-        <GoodBtn/>
+        <GoodBtn isActive={isGoodActive} onClick={handleGoodClick} />
         <div style={{marginLeft:'0.94rem', marginRight:'0.94rem'}}/>
-        <HateBtn/>
+        <HateBtn isActive={isHateActive} onClick={handleHateClick} />
         <div style={inputBox}>
         <input
           style={inputStyle}
@@ -67,15 +79,6 @@ const inputStyleBlue = {
   height: '4.375rem', 
   display:'flex', 
   marginLeft:'1.81rem'
-};
-
-const buttonStyle = {
-  width: "3.57575rem",
-  height: "4.375rem",
-  flexShrink: "0",
-  borderRadius: "1.5625rem",
-  border: "1px solid #DDD",
-  background: "#DDD",
 };
 
 const inputBox = {
