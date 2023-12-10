@@ -53,11 +53,11 @@ const Login = ({
     if (res) {
       setTFRegistered(true)
     }
-    // if (res === true) {
-    // navigate("/verifyOTP")
-    // } else {
-    navigate("/createOTP")
-    // }
+    if (res === true) {
+      navigate("/verifyOTP")
+    } else {
+      navigate("/createOTP")
+    }
   }
 
   return (

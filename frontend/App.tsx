@@ -130,7 +130,12 @@ function App() {
             <VerifyOTP principal={principal} setTFAAuthed={setTFAAuthed} />
           }
         />
-        <Route path="/profile" element={<Profile principal={principal} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile principal={principal} setPrincipal={setPrincipal} />
+          }
+        />
       </Routes>
     </WagmiConfig>
   )

@@ -78,6 +78,7 @@ const VerifyOTP = ({ principal, setTFAAuthed }) => {
     const secret = await authentication.query_secretHash(principal)
 
     try {
+      console.log("Verifying", token, secret)
       const isValid = await a.verify({ token, secret })
       console.log("isValid", isValid)
 
@@ -86,6 +87,8 @@ const VerifyOTP = ({ principal, setTFAAuthed }) => {
     } catch (e) {
       console.error(e)
     }
+
+    setToken("")
   }
 
   const handleInputChange = (index, e) => {
