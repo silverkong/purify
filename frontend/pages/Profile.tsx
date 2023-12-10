@@ -16,7 +16,7 @@ const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
 //   principal: string
 // }
-export default function Profile({ principal }) {
+export default function Profile({ principal, setPrincipal }) {
   // Canisters
   const [httpOutcalls] = useCanister("httpOutcalls")
   const [purify] = useCanister("purify")
@@ -34,14 +34,14 @@ export default function Profile({ principal }) {
   // Name, PFP
   const [name, setName] = useState("")
   const [pfp, setPfp] = useState("")
-  const [holdings, setHoldings] = useState<string[]>()
+  const [holdings, setHoldings] = useState<any>()
 
   const { address, isConnected } = useAccount()
 
-  useEffect(() => {
-    queryIndex()
-    queryProfile()
-  }, [])
+  // useEffect(() => {
+  //   queryIndex()
+  //   queryProfile()
+  // }, [])
 
   useEffect(() => {
     if (isConnected) {
@@ -50,30 +50,40 @@ export default function Profile({ principal }) {
   }, [isConnected])
 
   const queryAll = async () => {
-    await queryFriendTech()
-    await queryHolder()
     await queryIndex()
     await queryProfile()
+    await queryFriendTech()
+    await queryHolder()
   }
 
   const queryIndex = async () => {
     console.log("Querying index")
-    const index = await purify.query_index(principal)
+    const index = (await purify.query_index(principal)) as any[]
     console.log("Index queried")
     console.log(index)
-    setIndex(index)
+    if (index.length === 0) {
+      await purify.create_index(principal)
+      console.log("Index created")
+    } else {
+      setIndex(index)
+    }
   }
 
   const queryProfile = async () => {
     console.log("Querying profile")
-    const profile = await purify.query_profile(principal)
+    const profile = (await purify.query_profile(principal)) as any
     const comments = await purify.query_comments(principal)
     console.log("Profile queried")
     console.log(profile)
-    setProfile(profile)
-    setComments(comments)
-    setName(profile[1])
-    setPfp(profile[2])
+    if (profile.length === 0) {
+      await purify.create_profile(principal)
+      console.log("Profile created")
+    } else {
+      setProfile(profile)
+      setComments(comments)
+      setName(profile[1])
+      setPfp(profile[2])
+    }
   }
 
   const queryFriendTech = async () => {
@@ -101,11 +111,16 @@ export default function Profile({ principal }) {
     console.log("httpOutcalls", httpOutcalls)
     try {
       const res = await httpOutcalls.queryHolder(address)
-      if (!res) return
+      // if (!res) return
       const jsonRes = JSON.parse(res as string)
-      const holdingsArr = Object.keys(jsonRes).map((key) => jsonRes[key])
-      setHoldings(holdingsArr)
-      console.log("success!", holdingsArr)
+      console.log(jsonRes.users)
+      // const holdingsArr = Object.keys(jsonRes.users).map((key) => jsonRes[key])
+      // const list1 = list2.map(innerList => innerList[1]);
+      const holdingsArr = Object.entries(jsonRes.users)
+      const holdingsUsersArr = holdingsArr.map((holding) => holding[1])
+      console.log("holdingsArr", holdingsUsersArr)
+
+      setHoldings(holdingsUsersArr)
       console.log("updated profile")
     } catch (err) {
       console.log("error!", err)
@@ -131,7 +146,17 @@ export default function Profile({ principal }) {
       <section>
         {holding ? (
           <section className={styles.section_holding}>
-            {holdings && holdings.map((holding) => <div>{holding}</div>)}
+            {holdings &&
+              holdings.map((holding) => (
+                // <div key={holding.id}>{holding.twitterName}</div>
+                <ListSocialHolding
+                  key={holding.id}
+                  name={holding.twitterName}
+                  address={holding.address}
+                  principal={holding.principal}
+                  onClick={() => {}}
+                />
+              ))}
           </section>
         ) : (
           <section className={styles.section_connected_social}>

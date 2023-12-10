@@ -90,24 +90,6 @@ function App() {
         <ConnectButton />
       </div> */}
       {/* <ConnectDialog /> */}
-      <div>
-        <Purify TFAuthed={TFAuthed} principal={principal} />
-      </div>
-      {!TFAuthed && (
-        <div>
-          <Authenticator
-            TFAuthed={TFAuthed}
-            setTFAAuthed={setTFAAuthed}
-            principal={principal}
-            setPrincipal={setPrincipal}
-          />
-        </div>
-      )}
-      {TFAuthed && (
-        <div>
-          <SocialQuery principal={principal} />
-        </div>
-      )}
       <Routes>
         <Route
           path="/"
@@ -130,7 +112,12 @@ function App() {
             <VerifyOTP principal={principal} setTFAAuthed={setTFAAuthed} />
           }
         />
-        <Route path="/profile" element={<Profile principal={principal} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile principal={principal} setPrincipal={setPrincipal} />
+          }
+        />
       </Routes>
     </WagmiConfig>
   )
