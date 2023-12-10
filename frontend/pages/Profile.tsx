@@ -92,7 +92,7 @@ export default function Profile({ principal, setPrincipal }) {
     console.log("httpOutcalls", httpOutcalls)
     try {
       const res = await httpOutcalls.queryFriendTech(address)
-      if (!res) return
+      console.log("res", res)
       const jsonRes = JSON.parse(res as string)
       console.log("success!", jsonRes)
       setName(jsonRes.twitterName)
