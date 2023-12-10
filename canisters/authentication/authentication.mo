@@ -16,8 +16,13 @@ actor Authentication {
         var secretHash: Text;
     };
 
+    type ETHAddress = {
+        var ethAddress: Text;
+    };
+
     // MAPPING
     let authStatus = H.HashMap<Principal, AuthStatus>(0, P.equal, P.hash);
+    let ethAddress = H.HashMap<Principal, ETHAddress>(0, P.equal, P.hash);
 
     public func status_initialize (_principal: Text) : async Bool {
         let principal = Principal.fromText(_principal);
@@ -36,6 +41,7 @@ actor Authentication {
             };
         };
     };  
+
 
     public func query_secretProvided (_principal: Text) : async Bool {
         let principal = Principal.fromText(_principal);
@@ -86,6 +92,37 @@ actor Authentication {
             case (?s){
                 s.secretHash := _secretHash;
                 authStatus.put(principal, s);
+                return true;
+            };
+        };
+    };
+
+    public func query_ethAddress (_principal: Text) : async Text {
+        let principal = Principal.fromText(_principal);
+        let statusExists = await status_initialize(_principal);
+        let status = switch (ethAddress.get(principal)){
+            case (null){
+                return "";
+            };
+            case (?s){
+                return s.ethAddress;
+            };
+        };
+    };
+
+    public func update_ethAddress (_principal: Text, _ethAddress: Text) : async Bool {
+        let principal = Principal.fromText(_principal);
+        let status = switch (ethAddress.get(principal)){
+            case (null){
+                let newETHAddress : ETHAddress = {
+                    var ethAddress = _ethAddress;
+                };
+                ethAddress.put(principal, newETHAddress);
+                return true;
+            };
+            case (?s){
+                s.ethAddress := _ethAddress;
+                ethAddress.put(principal, s);
                 return true;
             };
         };

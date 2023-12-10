@@ -70,6 +70,8 @@ const CreateOTPCode = ({ principal }: CreateORPCodeProps) => {
       console.log(imageUrl)
       setQr(imageUrl)
     })
+
+    await authentication.update_secretProvided(principal, true)
   }
   return (
     <div className="center">

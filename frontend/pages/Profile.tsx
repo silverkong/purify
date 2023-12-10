@@ -11,12 +11,20 @@ import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
 
 import { useAccount } from "wagmi"
+import { useNavigate } from "react-router-dom"
 
 const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
 //   principal: string
 // }
-export default function Profile({ principal, setPrincipal }) {
+export default function Profile({
+  principal,
+  setPrincipal,
+  setCommentPrincipal,
+}) {
+  // navigate
+  const navigate = useNavigate()
+
   // Canisters
   const [httpOutcalls] = useCanister("httpOutcalls")
   const [purify] = useCanister("purify")
@@ -38,10 +46,10 @@ export default function Profile({ principal, setPrincipal }) {
 
   const { address, isConnected } = useAccount()
 
-  // useEffect(() => {
-  //   queryIndex()
-  //   queryProfile()
-  // }, [])
+  useEffect(() => {
+    queryIndex()
+    queryProfile()
+  }, [])
 
   useEffect(() => {
     if (isConnected) {
@@ -127,6 +135,10 @@ export default function Profile({ principal, setPrincipal }) {
     }
   }
 
+  const handleComment = async () => {
+    navigate("/comment")
+  }
+
   return (
     <div>
       <Logo />
@@ -154,7 +166,10 @@ export default function Profile({ principal, setPrincipal }) {
                   name={holding.twitterName}
                   address={holding.address}
                   principal={holding.principal}
-                  onClick={() => {}}
+                  onClick={() => {
+                    setCommentPrincipal(holding.principal)
+                    handleComment()
+                  }}
                 />
               ))}
           </section>

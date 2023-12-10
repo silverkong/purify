@@ -73,13 +73,14 @@ const wagmiConfig = createConfig({
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
 //4. (임시) comment 테스트용
-import Comment from "./pages/Comment";
+import Comment from "./pages/Comment"
 
 function App() {
   // const { isConnected, principal } = useConnect()
 
   const [TFAuthed, setTFAAuthed] = useState(false)
   const [principal, setPrincipal] = useState("")
+  const [commentPrincipal, setCommentPrincipal] = useState("")
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -118,10 +119,22 @@ function App() {
         <Route
           path="/profile"
           element={
-            <Profile principal={principal} setPrincipal={setPrincipal} />
+            <Profile
+              principal={principal}
+              setPrincipal={setPrincipal}
+              setCommentPrincipal={setCommentPrincipal}
+            />
           }
         />
-        <Route path="/comment" element={<Comment principal={principal}/>}/>
+        <Route
+          path="/comment"
+          element={
+            <Comment
+              principal={principal}
+              commentPrincipal={commentPrincipal}
+            />
+          }
+        />
       </Routes>
     </WagmiConfig>
   )
