@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GoodBtn from "../components/GoodBtn"
 import HateBtn from "../components/HateBtn"
+import SendImg from "../image/send.png"
 
 const CommentInput = ({ onCommentSubmit }) => {
   const [isInputEmpty, setInputEmpty] = useState(true);
@@ -29,15 +30,15 @@ const CommentInput = ({ onCommentSubmit }) => {
         <div style={inputBox}>
         <input
           style={inputStyle}
-          placeholder="Write your comment"
+          placeholder="   Write your comment"
           value={comment}
           onChange={(e) => {
             setComment(e.target.value);
             setInputEmpty(e.target.value === "");
           }}
         />
-        <button style={btnStyle} type="submit" onClick={handleCommentSubmit}>
-          Submit
+        <button style={btnStyle as React.CSSProperties} type="submit" onClick={handleCommentSubmit}>
+            <img src={SendImg}/>
         </button>
       </div>
     </div>
@@ -50,21 +51,19 @@ const inputStyleGray = {
   borderRadius: "1.5625rem",
   border: "1px solid #DDD",
   background: "#FFF",
-  width: '53.4375rem',
+  width: '100%',
   height: '4.375rem', 
   display:'flex', 
   marginLeft:'1.81rem'
 };
 
 const inputStyleBlue = {
-  width: "100%",
-  height: "100%",
   border: "none",
   outline: "none",
   borderRadius: "1.5625rem",
   border: "1px solid #06F",
   background: "#FFF",
-  width: '53.4375rem',
+  width: "100%",
   height: '4.375rem', 
   display:'flex', 
   marginLeft:'1.81rem'
@@ -80,7 +79,9 @@ const buttonStyle = {
 };
 
 const inputBox = {
-    display:'flex'
+    display:'flex', 
+    width:'100%', 
+    marginRight:"12.25rem"
 };
 
 const btnStyleGray = {
