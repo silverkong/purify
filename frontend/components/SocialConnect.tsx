@@ -38,7 +38,8 @@ const SocialConnect = ({
         <option value="nextId">next id</option>
       </select>
       <button
-        className={styles.btn_social_connect}
+        className={socialFi === "" ? styles.btn_social_connect : styles.btn_social_connect_disabled}
+        disabled={socialFi === ""}
         onClick={async () => {
           disconnect()
           await open()
