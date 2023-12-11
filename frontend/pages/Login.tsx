@@ -53,6 +53,7 @@ const Login = ({
     if (res) {
       setTFRegistered(true)
     }
+    console.log("LOGIN RES", res)
     if (res === true) {
       navigate("/verifyOTP")
     } else {

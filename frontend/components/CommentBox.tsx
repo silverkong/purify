@@ -1,20 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react"
 import CommentInput from "../components/CommentInput"
 import CommentList from "../components/CommentList"
 
-const CommentBox = () => {
-  const [comments, setComments] = useState([]);
+const CommentBox = ({
+  comments: commentsICP,
+  principal,
+  commentPrincipal,
+  setCommented,
+}) => {
+  const [comments, setComments] = useState([])
 
-  const handleCommentSubmit = (comment) => {
-    setComments([...comments, comment]);
-  };
+  // const handleCommentSubmit = (comment) => {
+  //   setComments([...comments, comment])
+  // }
+
+  useEffect(() => {
+    console.log("Updating comments", commentsICP)
+    console.log("principal", principal)
+    console.log("commentPrincipal", commentPrincipal)
+    if (commentsICP !== null) {
+      setComments(commentsICP)
+    }
+  }, [commentsICP])
 
   return (
     <div className="commentBox">
-        <section style={{marginTop:'1.25rem', marginLeft:'12rem'}}>
+      <section style={{ marginTop: "1.25rem", marginLeft: "12rem" }}>
         <CommentList comments={comments} />
-        <CommentInput onCommentSubmit={handleCommentSubmit} />
-        </section>
+        <CommentInput
+          principal={principal}
+          commentPrincipal={commentPrincipal}
+          setCommented={setCommented}
+        />
+      </section>
     </div>
   )
 }

@@ -11,15 +11,24 @@ import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
 
 import { useAccount } from "wagmi"
+import { useNavigate } from "react-router-dom"
 
 const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
 //   principal: string
 // }
-export default function Profile({ principal, setPrincipal }) {
+export default function Profile({
+  principal,
+  setPrincipal,
+  setCommentPrincipal,
+}) {
+  // navigate
+  const navigate = useNavigate()
+
   // Canisters
   const [httpOutcalls] = useCanister("httpOutcalls")
   const [purify] = useCanister("purify")
+  const [authentication] = useCanister("authentication")
 
   const [holding, setHolding] = useState(false)
 
@@ -38,10 +47,10 @@ export default function Profile({ principal, setPrincipal }) {
 
   const { address, isConnected } = useAccount()
 
-  // useEffect(() => {
-  //   queryIndex()
-  //   queryProfile()
-  // }, [])
+  useEffect(() => {
+    queryIndex()
+    queryProfile()
+  }, [])
 
   useEffect(() => {
     if (isConnected) {
@@ -99,6 +108,10 @@ export default function Profile({ principal, setPrincipal }) {
       await purify.update_profile(principal, jsonRes.twitterName, 0)
       await purify.update_profile(principal, jsonRes.twitterPfpUrl, 1)
       await purify.update_index(principal, address, 0)
+      // 이더 -> 프린 으로 고치셈
+      await authentication.update_ethAddress(address, principal)
+      await authentication.update_ethAddress(address.toLowerCase(), principal)
+      console.log("updated ethAddress", address, principal)
       console.log("updated profile")
     } catch (err) {
       console.log("error!", err)
@@ -124,6 +137,22 @@ export default function Profile({ principal, setPrincipal }) {
       console.log("updated profile")
     } catch (err) {
       console.log("error!", err)
+    }
+  }
+
+  const handleComment = async (commentAddress) => {
+    // setCommentPrincipal(holding.principal)
+    // 현재는 프린 -> 이더로 되어있음 고치셈
+    const res = await authentication.query_ethAddress(commentAddress)
+    if (!res) {
+      console.log("Queryying with address", commentAddress)
+      console.log("res", res)
+      console.log("No Purify ACC found")
+      return
+    } else {
+      console.log("Purify ACC found", res)
+      setCommentPrincipal(res)
+      navigate("/comment")
     }
   }
 
@@ -154,7 +183,9 @@ export default function Profile({ principal, setPrincipal }) {
                   name={holding.twitterName}
                   address={holding.address}
                   principal={holding.principal}
-                  onClick={() => {}}
+                  onClick={() => {
+                    handleComment(holding.address)
+                  }}
                 />
               ))}
           </section>
