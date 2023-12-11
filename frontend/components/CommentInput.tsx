@@ -48,12 +48,12 @@ const CommentInput = ({ principal, commentPrincipal, setCommented }) => {
   return (
     <div style={inputBoxStyle}>
       <GoodBtn isActive={isGoodActive} onClick={handleGoodClick} />
-      <div style={{ marginLeft: "0.94rem", marginRight: "0.94rem" }} />
+      <div style={{ marginLeft: "15px" }} />
       <HateBtn isActive={isHateActive} onClick={handleHateClick} />
       <div style={inputBox}>
         <input
           style={inputStyle}
-          placeholder="   Write your comment"
+          placeholder="Write your comment"
           value={comment}
           onChange={(e) => {
             setComment(e.target.value)
@@ -81,6 +81,7 @@ const inputStyleGray = {
   height: "4.375rem",
   display: "flex",
   marginLeft: "1.81rem",
+  padding: "0 33px",
 }
 
 const inputStyleBlue = {
@@ -92,6 +93,7 @@ const inputStyleBlue = {
   height: "4.375rem",
   display: "flex",
   marginLeft: "1.81rem",
+  padding: "0 33px",
 }
 
 const inputBox = {
