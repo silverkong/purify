@@ -23,8 +23,8 @@ const CommentList = ({ comments }) => {
       {comments &&
         comments.map((comment) => (
           <div style={ListStyle}>
-            <p>{`Comment: ${comment.comment}`}</p>
-            <p>{`Commentor: ${comment.commentor}`}</p>
+            <p>{`${comment.comment}`}</p> 
+            {/* <p>{`Commentor: ${comment.commentor}`}</p> */}
           </div>
         ))}
     </div>
