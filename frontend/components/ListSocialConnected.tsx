@@ -11,7 +11,7 @@ const ListSocialConnected = ({ disconnect ,address }) => {
   
   return (
     <div className={styles.box_connected_social_list}>
-      {address ?
+      {address &&
         <div>
           <div className={styles.box_social_img}>
             <img src={lgFriendTech} alt="friend tech" />
@@ -24,7 +24,6 @@ const ListSocialConnected = ({ disconnect ,address }) => {
               disconnect
             </button>
         </div>
-        :<div></div>
       }
     
     </div>
