@@ -131,6 +131,7 @@ actor Purify {
                 case 0 {
                     if(index.next_id == "") {
                         index.weight := index.weight + 1;
+                        index.next_id := info;
                     } else if(info == "") {
                         index.weight := index.weight - 1;
                     } else {
@@ -140,6 +141,7 @@ actor Purify {
                 case 1 {
                     if(index.post_address == "") {
                         index.weight := index.weight + 1;
+                        index.next_id := info;
                     } else if(info == "") {
                         index.weight := index.weight - 1;
                     } else {
@@ -150,6 +152,7 @@ actor Purify {
                    
                     if(index.friend_tech == "") {
                         index.weight := index.weight + 1;
+                        index.next_id := info;
                     } else if(info == "") {
                         index.weight := index.weight - 1;
                     } else {
@@ -160,6 +163,7 @@ actor Purify {
                     
                     if(index.stars_address == "") {
                         index.weight := index.weight + 1;
+                        index.next_id := info;
                     } else if(info == "") {
                         index.weight := index.weight - 1;
                     } else {

@@ -52,15 +52,18 @@ export default function Profile({
   const [socialFi, setSocialFi] = useState<SocialFi>()
 
   useEffect(() => {
-    if (isConnected) {
-      queryAll()
-    }
-  }, [isConnected])
-
-  useEffect(() => {
-    queryIndex()
-    queryProfile()
-  }, [])
+    connectWalletAndQuery();
+    
+  },[])
+  const connectWalletAndQuery = async () => {
+    await connect()
+    console.log("connected")
+    await queryAll()
+  }
+  // useEffect(() => {
+  //   queryIndex()
+  //   queryProfile()
+  // }, [])
 
   const queryAll = async () => {
     await queryIndex()
@@ -68,7 +71,7 @@ export default function Profile({
     await queryFriendTech()
     await queryHolder()
   }
-  // make e type event of onChange
+  
   const handleSocialFi = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "friendTech") {
       setSocialFi(SocialFi.FriendTech)
