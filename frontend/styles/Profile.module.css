@@ -39,6 +39,9 @@
 
 .box_profile_info > .box_profile_info_bottom {
   margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .box_profile_info > .box_profile_info_bottom > h1 {
