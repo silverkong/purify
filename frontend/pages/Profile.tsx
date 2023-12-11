@@ -129,7 +129,9 @@ export default function Profile({ principal, setPrincipal }) {
       console.log("error!", err)
     }
   }
-
+  const updateIndex = async (type:number) => {
+     await purify.update_index(principal, address, type)
+   }
   return (
     <div>
       <Logo />
@@ -165,7 +167,7 @@ export default function Profile({ principal, setPrincipal }) {
           <section className={styles.section_connected_social}>
             {index &&
               index.map((address, key) => (
-                <ListSocialConnected key={key} address={address} disconnect={disconnect} />
+                <ListSocialConnected key={key} address={address} disconnect={() => disconnect()} />
               ))}
             <SocialConnect connect={connect} />
           </section>
