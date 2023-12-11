@@ -48,6 +48,10 @@ export default function Profile({
   const [pfp, setPfp] = useState("")
   const [holdings, setHoldings] = useState<any>()
 
+  // like, dislike
+  const [like, setLike] = useState(0)
+  const [dislike, setDislike] = useState(0)
+
   const { address, isConnected } = useAccount()
   const [socialFi, setSocialFi] = useState<SocialFi>()
 
@@ -109,6 +113,8 @@ export default function Profile({
       setComments(comments as string)
       setName(profile[1])
       setPfp(profile[2])
+      setLike(Number(profile[3]))
+      setDislike(Number(profile[4]))
     }
   }
 
@@ -175,7 +181,13 @@ export default function Profile({
   return (
     <div>
       <Logo />
-      <ProfileTop name={name} pfp={pfp} principal={principal} />
+      <ProfileTop
+        name={name}
+        pfp={pfp}
+        principal={principal}
+        like={like}
+        dislike={dislike}
+      />
       <section className={styles.section_profile_bottom_title}>
         <ProfileBottomButton
           className={holding ? "" : styles.btn_profile_bottom_active}

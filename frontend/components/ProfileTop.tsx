@@ -14,7 +14,13 @@ const thumbStyle = {
   marginRight: "1.88rem",
 }
 
-const ProfileTop = ({ name, pfp, principal }) => {
+const ProfileTop = ({
+  name,
+  pfp,
+  principal,
+  like: likeC,
+  dislike: dislikeC,
+}) => {
   return (
     <section className={styles.section_profile_top}>
       {pfp === "" ? (
@@ -33,9 +39,9 @@ const ProfileTop = ({ name, pfp, principal }) => {
           <h1>0</h1>
           <span>point</span>
           <img src={like} style={{ marginLeft: "1.88rem" }} />
-          <span style={thumbStyle}>3</span>
+          <span style={thumbStyle}>{likeC}</span>
           <img src={dislike} />
-          <span style={thumbStyle}>1</span>
+          <span style={thumbStyle}>{dislikeC}</span>
         </div>
       </div>
     </section>
