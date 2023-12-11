@@ -34,6 +34,10 @@ export default function Comment({ principal, commentPrincipal }) {
   const [name, setName] = useState("")
   const [pfp, setPfp] = useState("")
 
+  // Like, Dislike
+  const [like, setLike] = useState(0)
+  const [dislike, setDislike] = useState(0)
+
   // Commented
   const [commented, setCommented] = useState(false)
 
@@ -73,6 +77,8 @@ export default function Comment({ principal, commentPrincipal }) {
       setComments(comments)
       setName(profile[1])
       setPfp(profile[2])
+      setLike(profile[3])
+      setDislike(profile[4])
       console.log("Profile set", profile)
       console.log("Comments set", comments)
       console.log("Name set", name)
@@ -83,7 +89,13 @@ export default function Comment({ principal, commentPrincipal }) {
   return (
     <div>
       <Logo />
-      <ProfileTop name={name} pfp={pfp} principal={commentPrincipal} />
+      <ProfileTop
+        name={name}
+        pfp={pfp}
+        principal={commentPrincipal}
+        like={like}
+        dislike={dislike}
+      />
       <section className={styles.section_profile_bottom_title}>
         <img src={message} className={styles.msgImg} />
         <ProfileBottomButton
