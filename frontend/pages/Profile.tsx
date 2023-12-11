@@ -52,9 +52,8 @@ export default function Profile({
   const [socialFi, setSocialFi] = useState<SocialFi>()
 
   useEffect(() => {
-    connectWalletAndQuery();
-    
-  },[])
+    connectWalletAndQuery()
+  }, [])
   const connectWalletAndQuery = async () => {
     await connect()
     console.log("connected")
@@ -71,7 +70,7 @@ export default function Profile({
     await queryFriendTech()
     await queryHolder()
   }
-  
+
   const handleSocialFi = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "friendTech") {
       setSocialFi(SocialFi.FriendTech)
@@ -209,13 +208,16 @@ export default function Profile({
         ) : (
           <section className={styles.section_connected_social}>
             {index &&
-              index.map((address, key) => (
-                <ListSocialConnected
-                  key={key}
-                  address={address}
-                  disconnect={() => disconnect()}
-                />
-              ))}
+              index.map(
+                (address, key) =>
+                  address && (
+                    <ListSocialConnected
+                      key={key}
+                      address={address}
+                      disconnect={() => disconnect()}
+                    />
+                  ),
+              )}
             <SocialConnect
               handleSocialFi={handleSocialFi}
               socialFi={socialFi}

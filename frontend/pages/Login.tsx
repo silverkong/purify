@@ -59,7 +59,7 @@ const Login = ({
     // } else {
     //   navigate("/createOTP")
     // }
-    navigate("/createOTP");
+    navigate("/createOTP")
   }
 
   return (

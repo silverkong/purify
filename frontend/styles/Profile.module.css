@@ -94,7 +94,7 @@
   padding: 0 200px;
 }
 
-.box_connected_social_list > .box_social_img {
+.box_connected_social_list .box_social_img {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +106,7 @@
   overflow: hidden;
 }
 
-.box_connected_social_list > .box_social_img > img {
+.box_connected_social_list .box_social_img > img {
   height: 100%;
 }
 
