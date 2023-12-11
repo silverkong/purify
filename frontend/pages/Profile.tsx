@@ -1,7 +1,7 @@
 import styles from "../styles/Profile.module.css"
-import React, { useEffect, useState } from "react"
+import React, { ChangeEvent, useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
-import { useDisconnect } from "wagmi"
+import { useConnect, useDisconnect } from "wagmi"
 // components
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
@@ -11,34 +11,30 @@ import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
 
 import { useAccount } from "wagmi"
-import { useNavigate } from "react-router-dom"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 
-const baseURL = "https://base.llamarpc.com/"
-// interface ProfileProps {
-//   principal: string
-// }
-export default function Profile({
-  principal,
-  setPrincipal,
-  setCommentPrincipal,
-}) {
-  // navigate
-  const navigate = useNavigate()
-
+enum SocialFi {
+  NextId,
+  PostTech,
+  FriendTech,
+  StarsArena,
+}
+export default function Profile({ principal, setPrincipal }) {
   // Canisters
   const [httpOutcalls] = useCanister("httpOutcalls")
   const [purify] = useCanister("purify")
   const [authentication] = useCanister("authentication")
 
   const [holding, setHolding] = useState(false)
-
   // Profile Query
-  const [index, setIndex] = useState(null)
-  const [profile, setProfile] = useState(null)
-  const [comments, setComments] = useState(null)
+  const [index, setIndex] = useState<string[]>();
+  const [profile, setProfile] = useState<string[]>();
+  const [comments, setComments] = useState<string>("")
 
   const [connected, setConnected] = useState([])
   const { disconnect } = useDisconnect()
+  // const {connect} = useConnect()
+  const { open:connect } = useWeb3Modal()
 
   // Name, PFP
   const [name, setName] = useState("")
@@ -46,12 +42,7 @@ export default function Profile({
   const [holdings, setHoldings] = useState<any>()
 
   const { address, isConnected } = useAccount()
-
-  useEffect(() => {
-    queryIndex()
-    queryProfile()
-  }, [])
-
+  const [socialFi, setSocialFi] = useState<SocialFi>()
   useEffect(() => {
     if (isConnected) {
       queryAll()
@@ -64,10 +55,22 @@ export default function Profile({
     await queryFriendTech()
     await queryHolder()
   }
+  // make e type event of onChange
+  const handleSocialFi = (e: ChangeEvent<HTMLSelectElement>) => {
 
+    if (e.target.value === "friendTech") {
+      setSocialFi(SocialFi.FriendTech)
+    } else if (e.target.value === "starsArena") {
+      setSocialFi(SocialFi.StarsArena)
+    } else if (e.target.value === "postTech") {
+      setSocialFi(SocialFi.PostTech)
+    } else if (e.target.value === "nextId") {
+      setSocialFi(SocialFi.NextId)
+    }
+  }
   const queryIndex = async () => {
     console.log("Querying index")
-    const index = (await purify.query_index(principal)) as any[]
+    const index = (await purify.query_index(principal)) as string[];
     console.log("Index queried")
     console.log(index)
     if (index.length === 0) {
@@ -80,7 +83,7 @@ export default function Profile({
 
   const queryProfile = async () => {
     console.log("Querying profile")
-    const profile = (await purify.query_profile(principal)) as any
+    const profile = (await purify.query_profile(principal)) as string[];
     const comments = await purify.query_comments(principal)
     console.log("Profile queried")
     console.log(profile)
@@ -89,7 +92,7 @@ export default function Profile({
       console.log("Profile created")
     } else {
       setProfile(profile)
-      setComments(comments)
+      setComments(comments as string)
       setName(profile[1])
       setPfp(profile[2])
     }
@@ -107,11 +110,7 @@ export default function Profile({
       setName(jsonRes.twitterName)
       await purify.update_profile(principal, jsonRes.twitterName, 0)
       await purify.update_profile(principal, jsonRes.twitterPfpUrl, 1)
-      await purify.update_index(principal, address, 0)
-      // 이더 -> 프린 으로 고치셈
-      await authentication.update_ethAddress(address, principal)
-      await authentication.update_ethAddress(address.toLowerCase(), principal)
-      console.log("updated ethAddress", address, principal)
+      await purify.update_index(principal, address, 2)
       console.log("updated profile")
     } catch (err) {
       console.log("error!", err)
@@ -139,23 +138,7 @@ export default function Profile({
       console.log("error!", err)
     }
   }
-
-  const handleComment = async (commentAddress) => {
-    // setCommentPrincipal(holding.principal)
-    // 현재는 프린 -> 이더로 되어있음 고치셈
-    const res = await authentication.query_ethAddress(commentAddress)
-    if (!res) {
-      console.log("Queryying with address", commentAddress)
-      console.log("res", res)
-      console.log("No Purify ACC found")
-      return
-    } else {
-      console.log("Purify ACC found", res)
-      setCommentPrincipal(res)
-      navigate("/comment")
-    }
-  }
-
+  
   return (
     <div>
       <Logo />
@@ -191,8 +174,11 @@ export default function Profile({
           </section>
         ) : (
           <section className={styles.section_connected_social}>
-            <ListSocialConnected onClick={disconnect} />
-            <SocialConnect onClick={disconnect} />
+            {index &&
+              index.map((address, key) => (
+                <ListSocialConnected key={key} address={address} disconnect={() => disconnect()} />
+              ))}
+              <SocialConnect handleSocialFi={handleSocialFi} socialFi={socialFi} purify={purify} principal={principal} setIndex= {setIndex} />
           </section>
         )}
       </section>

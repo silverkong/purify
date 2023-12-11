@@ -2,11 +2,11 @@ import React from "react"
 import styles from "../styles/Profile.module.css"
 // images
 import lgFriendTech from "../assets/lg_friend_tech.png"
-
+function makeSimpleAddress(address: string) {
+  return address.slice(0, 6) + "..." + address.slice(-4)
+}
 const ListSocialHolding = ({ onClick, name, address, principal }) => {
-  function makeSimpleAddress(address: string) {
-    return address.slice(0, 6) + "..." + address.slice(-4)
-  }
+  
   return (
     <div className={styles.box_holding_social_list}>
       <div className={styles.box_social_img}>
