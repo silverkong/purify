@@ -18,6 +18,10 @@ main {
   height: 100vh;
 }
 
+input:focus {
+  border: 1px solid var(--color-primary) !important;
+}
+
 :root {
   /* color */
   --color-primary: #0066ff;
