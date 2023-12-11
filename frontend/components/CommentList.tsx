@@ -18,7 +18,17 @@ const fontStyle = {
 }
 
 const CommentList = ({ comments }) => {
-  return <div>Hi</div>
+  return (
+    <div>
+      {comments &&
+        comments.map((comment) => (
+          <div style={ListStyle}>
+            <p>{`Comment: ${comment.comment}`}</p>
+            <p>{`Commentor: ${comment.commentor}`}</p>
+          </div>
+        ))}
+    </div>
+  )
 }
 
 export default CommentList

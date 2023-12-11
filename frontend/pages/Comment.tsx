@@ -48,6 +48,7 @@ export default function Comment({ principal, commentPrincipal }) {
   useEffect(() => {
     if (commented) {
       queryProfile()
+      setCommented(false)
     }
   }, [commented])
 

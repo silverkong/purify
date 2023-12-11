@@ -22,7 +22,7 @@ actor Authentication {
 
     // MAPPING
     let authStatus = H.HashMap<Principal, AuthStatus>(0, P.equal, P.hash);
-    let ethAddress = H.HashMap<Principal, ETHAddress>(0, P.equal, P.hash);
+    let ethAddress = H.HashMap<Text, Principal>(0, Text.equal, Text.hash);
 
     public func status_initialize (_principal: Text) : async Bool {
         let principal = Principal.fromText(_principal);
@@ -97,32 +97,27 @@ actor Authentication {
         };
     };
 
-    public func query_ethAddress (_principal: Text) : async Text {
-        let principal = Principal.fromText(_principal);
-        let statusExists = await status_initialize(_principal);
-        let status = switch (ethAddress.get(principal)){
+    public func query_ethAddress (_ethAddress: Text) : async Text {
+        let status = switch (ethAddress.get(_ethAddress)){
             case (null){
                 return "";
             };
             case (?s){
-                return s.ethAddress;
+                return Principal.toText(s);
             };
         };
     };
 
-    public func update_ethAddress (_principal: Text, _ethAddress: Text) : async Bool {
+    public func update_ethAddress (_ethAddress: Text, _principal: Text) : async Bool {
         let principal = Principal.fromText(_principal);
-        let status = switch (ethAddress.get(principal)){
+        let status = switch (ethAddress.get(_ethAddress)){
+            // 패턴 매칭, 존재하면 갱신, 없으면 새로 추가
             case (null){
-                let newETHAddress : ETHAddress = {
-                    var ethAddress = _ethAddress;
-                };
-                ethAddress.put(principal, newETHAddress);
+                ethAddress.put(_ethAddress, principal);
                 return true;
             };
             case (?s){
-                s.ethAddress := _ethAddress;
-                ethAddress.put(principal, s);
+                ethAddress.put(_ethAddress, principal);
                 return true;
             };
         };
