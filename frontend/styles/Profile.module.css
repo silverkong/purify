@@ -18,6 +18,11 @@
   background-color: var(--color-gray);
   border: 3px solid var(--color-white);
   border-radius: 80px;
+  overflow: hidden;
+}
+
+.box_profile_img > img {
+  width: 100%;
 }
 
 .box_profile_info {
@@ -32,6 +37,7 @@
 }
 
 .box_profile_info > .box_profile_info_top > span {
+  display: inline-block;
   color: var(--color-white);
   font-size: 14px;
   font-weight: 300;
@@ -40,7 +46,6 @@
 .box_profile_info > .box_profile_info_bottom {
   margin-top: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
