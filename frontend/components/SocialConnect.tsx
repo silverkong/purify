@@ -30,9 +30,6 @@ const SocialConnect = ({ handleSocialFi, socialFi, purify, principal, setIndex }
         <option value="postTech">posttech</option>
         <option value="nextId">next id</option>
       </select>
-      <div>
-        현재주소 : { isConnected && address }
-      </div>
       <button className={styles.btn_social_connect} onClick={() => { disconnect(); open();}}>
         connect
       </button>
