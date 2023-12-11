@@ -80,6 +80,7 @@ function App() {
 
   const [TFAuthed, setTFAAuthed] = useState(false)
   const [principal, setPrincipal] = useState("")
+  const [commentPrincipal, setCommentPrincipal] = useState("")
 
   return (
     <WagmiConfig config={wagmiConfig}>
