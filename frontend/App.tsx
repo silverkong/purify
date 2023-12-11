@@ -76,7 +76,7 @@ function App() {
   // const { isConnected, principal } = useConnect()
 
   const [TFAuthed, setTFAAuthed] = useState(false)
-  const [principal, setPrincipal] = useState("")
+  const [principal, setPrincipal] = useState("b77ix-eeaaa-aaaaa-qaada-cai") // TODO: replace this ""
 
   return (
     <WagmiConfig config={wagmiConfig}>
