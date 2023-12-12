@@ -30,11 +30,12 @@ const GoodBtn = ({ isActive, onClick }) => {
 
   const handleClick = () => {
     setIsBlueActive(!isBlueActive);
+    console.log("Good Button Clicked!"); // 좋아요 버튼 확인용
   };
 
   return (
     <div>
-      <div style={isActive ? blue : gray} onClick={onClick}>
+      <div style={isActive ? blue : gray} onClick={() => { onClick(); handleClick(); }}>
         <img src={isActive ? BlueLike : GrayLike} style={imgStyle} alt="GoodBtn" />
       </div>
     </div>
