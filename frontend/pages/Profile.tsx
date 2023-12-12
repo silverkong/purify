@@ -323,7 +323,6 @@ const inputStyleBlue = {
 const inputBox = {
   display: "flex",
   marginLeft: "12.25rem", 
-  background:'red', 
   marginRight:'12.44rem'
 }
 

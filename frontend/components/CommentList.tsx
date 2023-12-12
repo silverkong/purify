@@ -20,12 +20,11 @@ const fontStyle = {
 const CommentList = ({ comments }) => {
   return (
     <div>
-      
       {comments &&
         comments.map((comment) => (
           <div style={ListStyle}>
+            <img src={PuriImg} />
             <p>{`${comment.comment}`}</p> 
-            {/* <p>{`Commentor: ${comment.commentor}`}</p> */}
           </div>
         ))}
     </div>
