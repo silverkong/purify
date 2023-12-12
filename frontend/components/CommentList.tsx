@@ -20,6 +20,7 @@ const fontStyle = {
 const CommentList = ({ comments }) => {
   return (
     <div>
+      
       {comments &&
         comments.map((comment) => (
           <div style={ListStyle}>

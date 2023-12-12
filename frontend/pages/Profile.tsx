@@ -2,6 +2,7 @@ import styles from "../styles/Profile.module.css"
 import React, { ChangeEvent, useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
 import { useConnect, useDisconnect } from "wagmi"
+import SendImg from "../image/send.png"
 // components
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
@@ -33,6 +34,7 @@ export default function Profile({
   const [authentication] = useCanister("authentication")
 
   const [holding, setHolding] = useState(false)
+  const [search, setSearch] = useState(false)
   // Profile Query
   const [index, setIndex] = useState<string[]>()
   const [profile, setProfile] = useState<string[]>()
@@ -48,19 +50,29 @@ export default function Profile({
   const [pfp, setPfp] = useState("")
   const [holdings, setHoldings] = useState<any>()
 
+  // like, dislike
+  const [like, setLike] = useState(0)
+  const [dislike, setDislike] = useState(0)
+
   const { address, isConnected } = useAccount()
   const [socialFi, setSocialFi] = useState<SocialFi>()
 
-  useEffect(() => {
-    if (isConnected) {
-      queryAll()
-    }
-  }, [isConnected])
+  const [isInputEmpty, setInputEmpty] = useState(true)
+  const inputStyle = isInputEmpty ? inputStyleGray : inputStyleBlue
+  const btnStyle = isInputEmpty ? btnStyleGray : btnStyleBlue
 
   useEffect(() => {
-    queryIndex()
-    queryProfile()
+    connectWalletAndQuery()
   }, [])
+  const connectWalletAndQuery = async () => {
+    await connect()
+    console.log("connected")
+    await queryAll()
+  }
+  // useEffect(() => {
+  //   queryIndex()
+  //   queryProfile()
+  // }, [])
 
   const queryAll = async () => {
     await queryIndex()
@@ -68,7 +80,7 @@ export default function Profile({
     await queryFriendTech()
     await queryHolder()
   }
-  // make e type event of onChange
+
   const handleSocialFi = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "friendTech") {
       setSocialFi(SocialFi.FriendTech)
@@ -107,6 +119,8 @@ export default function Profile({
       setComments(comments as string)
       setName(profile[1])
       setPfp(profile[2])
+      setLike(Number(profile[3]))
+      setDislike(Number(profile[4]))
     }
   }
 
@@ -170,24 +184,78 @@ export default function Profile({
     }
   }
 
+  const handleCommentSubmit = async () => {
+
+  }
+
   return (
     <div>
       <Logo />
-      <ProfileTop name={name} pfp={pfp} principal={principal} />
+      <ProfileTop
+        name={name}
+        pfp={pfp}
+        principal={principal}
+        like={like}
+        dislike={dislike}
+      />
       <section className={styles.section_profile_bottom_title}>
         <ProfileBottomButton
           className={holding ? "" : styles.btn_profile_bottom_active}
           content="connected social"
-          onClick={() => setHolding(false)}
+          onClick={() => {
+            setHolding(false);
+            setSearch(false);
+          }}
         />
         <ProfileBottomButton
           className={holding ? styles.btn_profile_bottom_active : ""}
           content="holding"
-          onClick={() => setHolding(true)}
+          onClick={() => {
+            setHolding(true);
+            setSearch(false);
+          }}
+        />
+        <ProfileBottomButton
+          className={search ? styles.btn_profile_bottom_active : ""}
+          content="search"
+          onClick={() => {
+            setSearch(true);
+            setHolding(false);
+          }}
         />
       </section>
       <section>
-        {holding ? (
+        {search ? (
+          <section>
+            <div style={inputBox}>
+            <input
+              style={isInputEmpty ? inputStyleGray : inputStyleBlue}
+              onChange={(e) => setInputEmpty(e.target.value === '')}
+            />
+              <button
+                style={btnStyle as React.CSSProperties}
+                type="submit"
+                onClick={handleCommentSubmit}
+              >
+              <img src={SendImg} style={{marginTop: "0.3rem", marginLeft: "0.3rem"}}/>
+              </button>
+            </div>
+            <section className={styles.section_holding}>
+            {holdings &&
+              holdings.map((holding) => (
+                <ListSocialHolding
+                  key={holding.id}
+                  name={holding.twitterName}
+                  address={holding.address}
+                  principal={holding.principal}
+                  onClick={() => {
+                    handleComment(holding.address)
+                  }}
+                />
+              ))}
+          </section>
+          </section>
+        ) : holding ? (
           <section className={styles.section_holding}>
             {holdings &&
               holdings.map((holding) => (
@@ -206,13 +274,16 @@ export default function Profile({
         ) : (
           <section className={styles.section_connected_social}>
             {index &&
-              index.map((address, key) => (
-                <ListSocialConnected
-                  key={key}
-                  address={address}
-                  disconnect={() => disconnect()}
-                />
-              ))}
+              index.map(
+                (address, key) =>
+                  address && (
+                    <ListSocialConnected
+                      key={key}
+                      address={address}
+                      disconnect={() => disconnect()}
+                    />
+                  ),
+              )}
             <SocialConnect
               handleSocialFi={handleSocialFi}
               socialFi={socialFi}
@@ -225,4 +296,57 @@ export default function Profile({
       </section>
     </div>
   )
+}
+
+const inputStyleGray = {
+  marginTop:'1.06rem',
+  outline: "none",
+  borderRadius: "1.5625rem",
+  border: "1px solid #DDD",
+  background: "#FFF",
+  width: '100%',
+  height: '2.9375rem',
+  display: "flex"
+}
+
+const inputStyleBlue = {
+  marginTop:'1.06rem',
+  outline: "none",
+  borderRadius: "1.5625rem",
+  border: "1px solid #06F",
+  background: "#FFF",
+  width: '100%',
+  height: '2.9375rem',
+  display: "flex"
+}
+
+const inputBox = {
+  display: "flex",
+  marginLeft: "12.25rem", 
+  background:'red', 
+  marginRight:'12.44rem'
+}
+
+const btnStyleGray = {
+  width: '2.875rem', 
+  height: '2.9375rem', 
+  flexShrink: "0",
+  borderRadius: "1.5625rem",
+  border: "1px solid #DDD",
+  background: "#DDD",
+  position: "relative",
+  marginLeft: "-40px",
+  marginTop: "1.09rem"
+}
+
+const btnStyleBlue = {
+  width: '2.875rem', 
+  height: '2.9375rem', 
+  flexShrink: "0",
+  borderRadius: "1.5625rem",
+  border: "1px solid #06F",
+  background: "#06F",
+  position: "relative",
+  marginLeft: "-40px",
+  marginTop: "1.09rem"
 }
