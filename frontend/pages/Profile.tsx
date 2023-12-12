@@ -10,6 +10,7 @@ import ProfileBottomButton from "../components/ProfileBottomButton"
 import ListSocialHolding from "../components/ListSocialHolding"
 import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
+import ListWalletAddress from "../components/ListWalletAddress"
 
 import { useAccount } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
@@ -34,13 +35,13 @@ export default function Profile({
   const [authentication] = useCanister("authentication")
 
   const [holding, setHolding] = useState(false)
+  const [connected, setConnected] = useState(false)
   const [search, setSearch] = useState(false)
   // Profile Query
   const [index, setIndex] = useState<string[]>()
   const [profile, setProfile] = useState<string[]>()
   const [comments, setComments] = useState(null)
 
-  const [connected, setConnected] = useState([])
   const { disconnect } = useDisconnect()
   // const {connect} = useConnect()
   const { open: connect } = useWeb3Modal()
@@ -217,7 +218,7 @@ export default function Profile({
           }}
         />
         <ProfileBottomButton
-          className={search ? styles.btn_profile_bottom_active : ""}
+          className={search && !holding &&!connected ? styles.btn_profile_bottom_active : ""}
           content="search"
           onClick={() => {
             setSearch(true);
@@ -246,7 +247,9 @@ export default function Profile({
               </button>
             </div>
             {/* 여기에 친구 리스트가 뜸*/}
-            
+            <ListWalletAddress
+              walletAddress={walletAddress}
+            />
           </section>
         ) : holding ? (
           <section className={styles.section_holding}>
