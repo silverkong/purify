@@ -50,11 +50,7 @@ export default function Profile({
   const [name, setName] = useState("")
   const [pfp, setPfp] = useState("")
   const [holdings, setHoldings] = useState<any>()
-  const [walletAddress, setWalletAddress] = useState("");
-
-  // like, dislike
-  const [like, setLike] = useState(0)
-  const [dislike, setDislike] = useState(0)
+  const [walletAddress, setWalletAddress] = useState("")
 
   // like, dislike
   const [like, setLike] = useState(0)
@@ -190,9 +186,7 @@ export default function Profile({
     }
   }
 
-  const handleCommentSubmit = async () => {
-
-  }
+  const handleCommentSubmit = async () => {}
 
   return (
     <div>
@@ -209,24 +203,28 @@ export default function Profile({
           className={holding ? "" : styles.btn_profile_bottom_active}
           content="connected social"
           onClick={() => {
-            setHolding(false);
-            setSearch(false);
+            setHolding(false)
+            setSearch(false)
           }}
         />
         <ProfileBottomButton
           className={holding ? styles.btn_profile_bottom_active : ""}
           content="holding"
           onClick={() => {
-            setHolding(true);
-            setSearch(false);
+            setHolding(true)
+            setSearch(false)
           }}
         />
         <ProfileBottomButton
-          className={search && !holding &&!connected ? styles.btn_profile_bottom_active : ""}
+          className={
+            search && !holding && !connected
+              ? styles.btn_profile_bottom_active
+              : ""
+          }
           content="search"
           onClick={() => {
-            setSearch(true);
-            setHolding(false);
+            setSearch(true)
+            setHolding(false)
           }}
         />
       </section>
@@ -238,8 +236,8 @@ export default function Profile({
                 value={walletAddress} // 지갑 주소 검색
                 style={isInputEmpty ? inputStyleGray : inputStyleBlue}
                 onChange={(e) => {
-                  setWalletAddress(e.target.value);
-                  setInputEmpty(e.target.value === '');
+                  setWalletAddress(e.target.value)
+                  setInputEmpty(e.target.value === "")
                 }}
               />
               <button
@@ -247,7 +245,10 @@ export default function Profile({
                 type="submit"
                 onClick={handleCommentSubmit}
               >
-              <img src={SendImg} style={{marginTop: "0.3rem", marginLeft: "0.3rem"}}/>
+                <img
+                  src={SendImg}
+                  style={{ marginTop: "0.3rem", marginLeft: "0.3rem" }}
+                />
               </button>
             </div>
             {/* 여기에 친구 리스트가 뜸*/}
@@ -301,53 +302,53 @@ export default function Profile({
 }
 
 const inputStyleGray = {
-  marginTop:'1.06rem',
+  marginTop: "1.06rem",
   outline: "none",
   borderRadius: "1.5625rem",
   border: "1px solid #DDD",
   background: "#FFF",
-  width: '100%',
-  height: '2.9375rem',
-  display: "flex"
+  width: "100%",
+  height: "2.9375rem",
+  display: "flex",
 }
 
 const inputStyleBlue = {
-  marginTop:'1.06rem',
+  marginTop: "1.06rem",
   outline: "none",
   borderRadius: "1.5625rem",
   border: "1px solid #06F",
   background: "#FFF",
-  width: '100%',
-  height: '2.9375rem',
-  display: "flex"
+  width: "100%",
+  height: "2.9375rem",
+  display: "flex",
 }
 
 const inputBox = {
   display: "flex",
-  marginLeft: "12.25rem", 
-  marginRight:'12.44rem'
+  marginLeft: "12.25rem",
+  marginRight: "12.44rem",
 }
 
 const btnStyleGray = {
-  width: '2.875rem', 
-  height: '2.9375rem', 
+  width: "2.875rem",
+  height: "2.9375rem",
   flexShrink: "0",
   borderRadius: "1.5625rem",
   border: "1px solid #DDD",
   background: "#DDD",
   position: "relative",
   marginLeft: "-40px",
-  marginTop: "1.09rem"
+  marginTop: "1.09rem",
 }
 
 const btnStyleBlue = {
-  width: '2.875rem', 
-  height: '2.9375rem', 
+  width: "2.875rem",
+  height: "2.9375rem",
   flexShrink: "0",
   borderRadius: "1.5625rem",
   border: "1px solid #06F",
   background: "#06F",
   position: "relative",
   marginLeft: "-40px",
-  marginTop: "1.09rem"
+  marginTop: "1.09rem",
 }
