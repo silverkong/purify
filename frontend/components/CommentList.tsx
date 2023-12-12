@@ -23,8 +23,8 @@ const CommentList = ({ comments }) => {
       {comments &&
         comments.map((comment) => (
           <div style={ListStyle}>
+            <img src={PuriImg} />
             <p>{`${comment.comment}`}</p> 
-            {/* <p>{`Commentor: ${comment.commentor}`}</p> */}
           </div>
         ))}
     </div>

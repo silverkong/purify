@@ -60,6 +60,10 @@ export default function Comment({ principal, commentPrincipal }) {
   //   await queryProfile()
   // }
 
+  // like, dislike
+  const [like, setLike] = useState(0)
+  const [dislike, setDislike] = useState(0)
+
   const queryProfile = async () => {
     console.log("Querying profile")
     if (commentPrincipal === null) {
@@ -113,3 +117,4 @@ export default function Comment({ principal, commentPrincipal }) {
     </div>
   )
 }
+

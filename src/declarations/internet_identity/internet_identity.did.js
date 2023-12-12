@@ -230,10 +230,6 @@ export const idlFactory = ({ IDL }) => {
     'ok' : PreparedIdAlias,
     'authentication_failed' : IDL.Text,
   });
-  const ChallengeResult = IDL.Record({
-    'key' : ChallengeKey,
-    'chars' : IDL.Text,
-  });
   const RegisterResponse = IDL.Variant({
     'bad_challenge' : IDL.Null,
     'canister_full' : IDL.Null,

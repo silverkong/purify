@@ -30,11 +30,12 @@ const HateBtn = ({ isActive, onClick }) => {
 
   const handleClick = () => {
     setIsBlueActive(!isBlueActive);
+    console.log("Hate Button Clicked!"); // 싫어요 버튼 확인용
   };
 
   return (
     <div>
-       <div style={isActive ? blue : gray} onClick={onClick}>
+       <div style={isActive ? blue : gray}  onClick={() => { onClick(); handleClick(); }}>
         <img src={isActive ? BlueHate : GrayHate} style={imgStyle} alt="HateBtn" />
       </div>
     </div>
