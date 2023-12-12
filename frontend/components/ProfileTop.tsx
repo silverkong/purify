@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "../styles/Profile.module.css"
-import like from "../image/like.png"
-import dislike from "../image/dislike.png"
+import likeImg from "../image/like.png"
+import dislikeImg from "../image/dislike.png"
 
 const thumbStyle = {
   color: "#444",
@@ -14,7 +14,7 @@ const thumbStyle = {
   marginRight: "1.88rem",
 }
 
-const ProfileTop = ({ name, pfp, principal }) => {
+const ProfileTop = ({ name, pfp, principal, like, dislike }) => {
   return (
     <section className={styles.section_profile_top}>
       {pfp === "" ? (
@@ -32,10 +32,10 @@ const ProfileTop = ({ name, pfp, principal }) => {
         <div className={styles.box_profile_info_bottom}>
           <h1>0</h1>
           <span>point</span>
-          <img src={like} style={{ marginLeft: "1.88rem" }} />
-          <span style={thumbStyle}>3</span>
-          <img src={dislike} />
-          <span style={thumbStyle}>1</span>
+          <img src={likeImg} style={{ marginLeft: "1.88rem" }} /> {/* 좋아요 숫자 */}
+          <span style={thumbStyle}>{like}</span>
+          <img src={dislikeImg} /> {/* 싫어요 숫자 */}
+          <span style={thumbStyle}>{dislike}</span>
         </div>
       </div>
     </section>
@@ -43,3 +43,4 @@ const ProfileTop = ({ name, pfp, principal }) => {
 }
 
 export default ProfileTop
+
