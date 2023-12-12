@@ -14,7 +14,14 @@ const thumbStyle = {
   marginRight: "1.88rem",
 }
 
-const ProfileTop = ({ name, pfp, principal, like, dislike }) => {
+
+const ProfileTop = ({
+  name,
+  pfp,
+  principal,
+  like: likeC,
+  dislike: dislikeC,
+}) => {
   return (
     <section className={styles.section_profile_top}>
       {pfp === "" ? (
@@ -32,10 +39,10 @@ const ProfileTop = ({ name, pfp, principal, like, dislike }) => {
         <div className={styles.box_profile_info_bottom}>
           <h1>0</h1>
           <span>point</span>
-          <img src={likeImg} style={{ marginLeft: "1.88rem" }} /> {/* 좋아요 숫자 */}
-          <span style={thumbStyle}>{like}</span>
-          <img src={dislikeImg} /> {/* 싫어요 숫자 */}
-          <span style={thumbStyle}>{dislike}</span>
+          <img src={like} style={{ marginLeft: "1.88rem" }} />
+          <span style={thumbStyle}>{likeC}</span>
+          <img src={dislike} />
+          <span style={thumbStyle}>{dislikeC}</span>
         </div>
       </div>
     </section>

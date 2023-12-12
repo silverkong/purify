@@ -33,6 +33,7 @@ const buttonStyle = {
   fontWeight: "500",
   lineHeight: "1rem",
   marginTop: "3.19rem",
+  cursor: "pointer",
 }
 
 const imgStyle = {
@@ -99,7 +100,7 @@ const VerifyOTP = ({ principal, setTFAAuthed }) => {
       }
     }
   }
-////
+  ////
   return (
     <div>
       <Logo />

@@ -56,6 +56,10 @@ export default function Profile({
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
 
+  // like, dislike
+  const [like, setLike] = useState(0)
+  const [dislike, setDislike] = useState(0)
+
   const { address, isConnected } = useAccount()
   const [socialFi, setSocialFi] = useState<SocialFi>()
 

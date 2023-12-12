@@ -18,6 +18,11 @@
   background-color: var(--color-gray);
   border: 3px solid var(--color-white);
   border-radius: 80px;
+  overflow: hidden;
+}
+
+.box_profile_img > img {
+  width: 100%;
 }
 
 .box_profile_info {
@@ -32,6 +37,7 @@
 }
 
 .box_profile_info > .box_profile_info_top > span {
+  display: inline-block;
   color: var(--color-white);
   font-size: 14px;
   font-weight: 300;
@@ -40,7 +46,6 @@
 .box_profile_info > .box_profile_info_bottom {
   margin-top: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -89,7 +94,7 @@
   padding: 0 200px;
 }
 
-.box_connected_social_list > .box_social_img {
+.box_connected_social_list .box_social_img {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +106,7 @@
   overflow: hidden;
 }
 
-.box_connected_social_list > .box_social_img > img {
+.box_connected_social_list .box_social_img > img {
   height: 100%;
 }
 
@@ -149,6 +154,17 @@
 }
 
 .btn_social_connect {
+  width: 130px;
+  margin-left: auto;
+  padding: 12px 0;
+  background: none;
+  background-color: var(--color-primary);
+  border-radius: 30px;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.btn_social_connect_disabled {
   width: 130px;
   margin-left: auto;
   padding: 12px 0;
