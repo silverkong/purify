@@ -249,6 +249,8 @@ export default function Profile({
             {/* 여기에 친구 리스트가 뜸*/}
             <ListWalletAddress
               walletAddress={walletAddress}
+              // friendList={friendList}
+              // 친구 리스트 어떻게 가져오지......
             />
           </section>
         ) : holding ? (
