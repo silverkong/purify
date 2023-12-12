@@ -56,6 +56,10 @@ export default function Comment({ principal, commentPrincipal }) {
   //   await queryProfile()
   // }
 
+  // like, dislike
+  const [like, setLike] = useState(0)
+  const [dislike, setDislike] = useState(0)
+
   const queryProfile = async () => {
     console.log("Querying profile")
     if (commentPrincipal === null) {
@@ -83,7 +87,7 @@ export default function Comment({ principal, commentPrincipal }) {
   return (
     <div>
       <Logo />
-      <ProfileTop name={name} pfp={pfp} principal={commentPrincipal} />
+      <ProfileTop name={name} pfp={pfp} principal={commentPrincipal} like={like} dislike={dislike}/>
       <section className={styles.section_profile_bottom_title}>
         <img src={message} className={styles.msgImg} />
         <ProfileBottomButton
@@ -101,3 +105,4 @@ export default function Comment({ principal, commentPrincipal }) {
     </div>
   )
 }
+
