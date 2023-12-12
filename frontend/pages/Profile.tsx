@@ -52,12 +52,21 @@ export default function Profile({
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
 
+  // rerender holdings
+  const [rerender, setRerender] = useState(false)
+
   const { address, isConnected } = useAccount()
   const [socialFi, setSocialFi] = useState<SocialFi>()
 
   useEffect(() => {
     connectWalletAndQuery()
   }, [])
+
+  useEffect(() => {
+    queryHolder()
+    setRerender(false)
+  }, [rerender])
+
   const connectWalletAndQuery = async () => {
     await connect()
     console.log("connected")
@@ -236,6 +245,7 @@ export default function Profile({
               purify={purify}
               principal={principal}
               setIndex={setIndex}
+              setRerender={setRerender}
             />
           </section>
         )}

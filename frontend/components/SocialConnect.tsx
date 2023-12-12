@@ -10,20 +10,20 @@ const SocialConnect = ({
   purify,
   principal,
   setIndex,
+  setRerender,
 }) => {
   const { address } = useAccount()
-  const { open } = useWeb3Modal();
+  const { open } = useWeb3Modal()
   const { disconnect } = useDisconnect()
   const updateIndex = async (type: number) => {
     console.log("update index", type)
-    console.log(address)
     await purify.update_index(principal, address, type)
+    setRerender(true)
     const _index = await purify.query_index(principal)
-    setIndex(_index);
+    setIndex(_index)
     console.log("index", _index)
-    
   }
- 
+
   return (
     <div className={styles.box_connected_social_add}>
       <select
@@ -38,12 +38,16 @@ const SocialConnect = ({
         <option value="nextId">next id</option>
       </select>
       <button
-        className={socialFi === "" ? styles.btn_social_connect : styles.btn_social_connect_disabled}
+        className={
+          socialFi === ""
+            ? styles.btn_social_connect
+            : styles.btn_social_connect_disabled
+        }
         disabled={socialFi === ""}
         onClick={async () => {
           disconnect()
           await open()
-          socialFi && await updateIndex(socialFi)
+          socialFi && (await updateIndex(socialFi))
         }}
       >
         connect
