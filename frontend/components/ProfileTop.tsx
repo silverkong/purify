@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "../styles/Profile.module.css"
-import like from "../image/like.png"
-import dislike from "../image/dislike.png"
+import likeImg from "../image/like.png"
+import dislikeImg from "../image/dislike.png"
 
 const thumbStyle = {
   color: "#444",
@@ -13,6 +13,7 @@ const thumbStyle = {
   marginLeft: "0.94rem",
   marginRight: "1.88rem",
 }
+
 
 const ProfileTop = ({
   name,
@@ -49,3 +50,4 @@ const ProfileTop = ({
 }
 
 export default ProfileTop
+

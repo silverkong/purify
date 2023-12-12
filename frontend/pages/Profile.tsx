@@ -2,6 +2,7 @@ import styles from "../styles/Profile.module.css"
 import React, { ChangeEvent, useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
 import { useConnect, useDisconnect } from "wagmi"
+import SendImg from "../image/send.png"
 // components
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
@@ -9,6 +10,7 @@ import ProfileBottomButton from "../components/ProfileBottomButton"
 import ListSocialHolding from "../components/ListSocialHolding"
 import ListSocialConnected from "../components/ListSocialConnected"
 import SocialConnect from "../components/SocialConnect"
+import ListWalletAddress from "../components/ListWalletAddress"
 
 import { useAccount } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
@@ -33,12 +35,13 @@ export default function Profile({
   const [authentication] = useCanister("authentication")
 
   const [holding, setHolding] = useState(false)
+  const [connected, setConnected] = useState(false)
+  const [search, setSearch] = useState(false)
   // Profile Query
   const [index, setIndex] = useState<string[]>()
   const [profile, setProfile] = useState<string[]>()
   const [comments, setComments] = useState(null)
 
-  const [connected, setConnected] = useState([])
   const { disconnect } = useDisconnect()
   // const {connect} = useConnect()
   const { open: connect } = useWeb3Modal()
@@ -47,6 +50,7 @@ export default function Profile({
   const [name, setName] = useState("")
   const [pfp, setPfp] = useState("")
   const [holdings, setHoldings] = useState<any>()
+  const [walletAddress, setWalletAddress] = useState("")
 
   // like, dislike
   const [like, setLike] = useState(0)
@@ -54,6 +58,10 @@ export default function Profile({
 
   const { address, isConnected } = useAccount()
   const [socialFi, setSocialFi] = useState<SocialFi>()
+
+  const [isInputEmpty, setInputEmpty] = useState(true)
+  const inputStyle = isInputEmpty ? inputStyleGray : inputStyleBlue
+  const btnStyle = isInputEmpty ? btnStyleGray : btnStyleBlue
 
   useEffect(() => {
     connectWalletAndQuery()
@@ -179,6 +187,8 @@ export default function Profile({
     }
   }
 
+  const handleCommentSubmit = async () => {}
+
   return (
     <div>
       <Logo />
@@ -193,16 +203,63 @@ export default function Profile({
         <ProfileBottomButton
           className={holding ? "" : styles.btn_profile_bottom_active}
           content="connected social"
-          onClick={() => setHolding(false)}
+          onClick={() => {
+            setHolding(false)
+            setSearch(false)
+          }}
         />
         <ProfileBottomButton
           className={holding ? styles.btn_profile_bottom_active : ""}
           content="holding"
-          onClick={() => setHolding(true)}
+          onClick={() => {
+            setHolding(true)
+            setSearch(false)
+          }}
+        />
+        <ProfileBottomButton
+          className={
+            search && !holding && !connected
+              ? styles.btn_profile_bottom_active
+              : ""
+          }
+          content="search"
+          onClick={() => {
+            setSearch(true)
+            setHolding(false)
+          }}
         />
       </section>
       <section>
-        {holding ? (
+        {search ? (
+          <section>
+            <div style={inputBox}>
+              <input
+                value={walletAddress} // 지갑 주소 검색
+                style={isInputEmpty ? inputStyleGray : inputStyleBlue}
+                onChange={(e) => {
+                  setWalletAddress(e.target.value)
+                  setInputEmpty(e.target.value === "")
+                }}
+              />
+              <button
+                style={btnStyle as React.CSSProperties}
+                type="submit"
+                onClick={handleCommentSubmit}
+              >
+                <img
+                  src={SendImg}
+                  style={{ marginTop: "0.3rem", marginLeft: "0.3rem" }}
+                />
+              </button>
+            </div>
+            {/* 여기에 친구 리스트가 뜸*/}
+            <ListWalletAddress
+              walletAddress={walletAddress}
+              // friendList={friendList}
+              // 친구 리스트 어떻게 가져오지......
+            />
+          </section>
+        ) : holding ? (
           <section className={styles.section_holding}>
             {holdings &&
               holdings.map((holding) => (
@@ -243,4 +300,56 @@ export default function Profile({
       </section>
     </div>
   )
+}
+
+const inputStyleGray = {
+  marginTop: "1.06rem",
+  outline: "none",
+  borderRadius: "1.5625rem",
+  border: "1px solid #DDD",
+  background: "#FFF",
+  width: "100%",
+  height: "2.9375rem",
+  display: "flex",
+}
+
+const inputStyleBlue = {
+  marginTop: "1.06rem",
+  outline: "none",
+  borderRadius: "1.5625rem",
+  border: "1px solid #06F",
+  background: "#FFF",
+  width: "100%",
+  height: "2.9375rem",
+  display: "flex",
+}
+
+const inputBox = {
+  display: "flex",
+  marginLeft: "12.25rem",
+  marginRight: "12.44rem",
+}
+
+const btnStyleGray = {
+  width: "2.875rem",
+  height: "2.9375rem",
+  flexShrink: "0",
+  borderRadius: "1.5625rem",
+  border: "1px solid #DDD",
+  background: "#DDD",
+  position: "relative",
+  marginLeft: "-40px",
+  marginTop: "1.09rem",
+}
+
+const btnStyleBlue = {
+  width: "2.875rem",
+  height: "2.9375rem",
+  flexShrink: "0",
+  borderRadius: "1.5625rem",
+  border: "1px solid #06F",
+  background: "#06F",
+  position: "relative",
+  marginLeft: "-40px",
+  marginTop: "1.09rem",
 }
