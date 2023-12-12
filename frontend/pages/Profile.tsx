@@ -63,10 +63,12 @@ export default function Profile({
   }, [])
 
   useEffect(() => {
+    handleRerender()
+  }, [rerender])
+  const handleRerender = () => {
     queryHolder()
     setRerender(false)
-  }, [rerender])
-
+   }
   const connectWalletAndQuery = async () => {
     await connect()
     console.log("connected")
