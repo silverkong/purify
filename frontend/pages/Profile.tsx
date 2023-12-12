@@ -49,6 +49,7 @@ export default function Profile({
   const [name, setName] = useState("")
   const [pfp, setPfp] = useState("")
   const [holdings, setHoldings] = useState<any>()
+  const [walletAddress, setWalletAddress] = useState("");
 
   // like, dislike
   const [like, setLike] = useState(0)
@@ -228,10 +229,14 @@ export default function Profile({
         {search ? (
           <section>
             <div style={inputBox}>
-            <input
-              style={isInputEmpty ? inputStyleGray : inputStyleBlue}
-              onChange={(e) => setInputEmpty(e.target.value === '')}
-            />
+              <input
+                value={walletAddress} // 지갑 주소 검색
+                style={isInputEmpty ? inputStyleGray : inputStyleBlue}
+                onChange={(e) => {
+                  setWalletAddress(e.target.value);
+                  setInputEmpty(e.target.value === '');
+                }}
+              />
               <button
                 style={btnStyle as React.CSSProperties}
                 type="submit"
@@ -240,7 +245,7 @@ export default function Profile({
               <img src={SendImg} style={{marginTop: "0.3rem", marginLeft: "0.3rem"}}/>
               </button>
             </div>
-            {/* 여기에 친구 리스트가 뜸. hoding코드 그대로 가져옴 */}
+            {/* 여기에 친구 리스트가 뜸*/}
             
           </section>
         ) : holding ? (
