@@ -240,20 +240,8 @@ export default function Profile({
               <img src={SendImg} style={{marginTop: "0.3rem", marginLeft: "0.3rem"}}/>
               </button>
             </div>
-            <section className={styles.section_holding}>
-            {holdings &&
-              holdings.map((holding) => (
-                <ListSocialHolding
-                  key={holding.id}
-                  name={holding.twitterName}
-                  address={holding.address}
-                  principal={holding.principal}
-                  onClick={() => {
-                    handleComment(holding.address)
-                  }}
-                />
-              ))}
-          </section>
+            {/* 여기에 친구 리스트가 뜸. hoding코드 그대로 가져옴 */}
+            
           </section>
         ) : holding ? (
           <section className={styles.section_holding}>
