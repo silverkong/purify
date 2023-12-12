@@ -58,15 +58,16 @@ export default function Profile({
   useEffect(() => {
     connectWalletAndQuery()
   }, [])
+  useEffect(() => { 
+      queryIndex()
+      queryProfile()
+  })
   const connectWalletAndQuery = async () => {
     await connect()
     console.log("connected")
     await queryAll()
   }
-  // useEffect(() => {
-  //   queryIndex()
-  //   queryProfile()
-  // }, [])
+  
 
   const queryAll = async () => {
     await queryIndex()
