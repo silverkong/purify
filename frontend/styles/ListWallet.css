@@ -18,7 +18,7 @@
     flex-shrink: 0;
     border-radius: 1.875rem;
     border: 1px solid #06F;
-     background: #FFF;
+    background: #FFF;
     color: #06F;
     text-align: center;
     font-family: Poppins;
@@ -26,4 +26,5 @@
     font-style: normal;
     font-weight: 500;
     line-height: 1rem; /* 114.286% */
+    margin-left: auto;
 }

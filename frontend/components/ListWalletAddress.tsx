@@ -28,7 +28,6 @@
 
 // export default ListWalletAddress;
 import React from "react"
-import { Link } from "react-router-dom";
 import lgFriendTech from "../assets/lg_friend_tech.png"
 import "../styles/ListWallet.css"
 
@@ -44,6 +43,7 @@ const ListWalletAddress = ({walletAddress}) => {
       <span style={{marginLeft:"0.63rem"}}>@beakerjin</span> {/* 임시이름 */}
       <button className="detail-btn">
         detail
+        {/* searchDetail로 가는 코드 추가해야됨 */}
       </button>
     </div>
   )
