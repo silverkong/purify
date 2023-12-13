@@ -122,7 +122,6 @@ function App() {
           element={
             <Profile
               principal={principal}
-              setPrincipal={setPrincipal}
               setCommentPrincipal={setCommentPrincipal}
             />
           }
