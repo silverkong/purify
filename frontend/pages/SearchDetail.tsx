@@ -6,7 +6,7 @@ import { useDisconnect } from "wagmi"
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
 import ProfileBottomButton from "../components/ProfileBottomButton"
-import CommentList from "../components/CommentList"
+import UserComment from "../components/UserComment"
 
 import { useAccount } from "wagmi"
 
@@ -100,8 +100,7 @@ export default function SearchDetail({principal,commentPrincipal}) {
           onClick={() => setHolding(false)}
         />
       </section>
-      <CommentList comments={comments} />
-      {/* comment list 출력 */}
+      <UserComment/> {/* comment list 출력/UI*/}
     </div>
   )
 }

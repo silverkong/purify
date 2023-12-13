@@ -28,6 +28,7 @@
 
 // export default ListWalletAddress;
 import React from "react"
+import { Link } from "react-router-dom";
 import lgFriendTech from "../assets/lg_friend_tech.png"
 import "../styles/ListWallet.css"
 
