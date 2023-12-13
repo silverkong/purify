@@ -18,6 +18,7 @@ const thumbStyle = {
 const ProfileTop = ({
   name,
   pfp,
+  vlyPoint,
   principal,
   like: likeC,
   dislike: dislikeC,
@@ -39,7 +40,7 @@ const ProfileTop = ({
           <span>{principal}</span>
         </div>
         <div className={styles.box_profile_info_bottom}>
-          <h1>0</h1>
+          <h1>{ vlyPoint}</h1>
           <span>point</span>
           <img src={likeImg} style={{ width: "25px", marginLeft: "1.88rem" }} />
           <span style={thumbStyle}>{likeC}</span>

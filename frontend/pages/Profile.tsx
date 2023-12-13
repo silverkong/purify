@@ -53,9 +53,10 @@ export default function Profile({
   const [holdings, setHoldings] = useState<any>()
   const [walletAddress, setWalletAddress] = useState("")
 
-  // like, dislike
+  // like, dislike, vly point
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
+  const [vlyPoint, setVlyPoint] = useState(0)
 
   // rerender holdings
   const [rerender, setRerender] = useState(false)
@@ -130,6 +131,7 @@ export default function Profile({
       setComments(comments as string)
       setName(profile[1])
       setPfp(profile[2])
+      setVlyPoint(Number(profile[5]))
       setLike(Number(profile[3]))
       setDislike(Number(profile[4]))
     }
@@ -219,6 +221,7 @@ export default function Profile({
         principal={principal}
         like={like}
         dislike={dislike}
+        vlyPoint={vlyPoint}
       />
       <section className={styles.section_profile_bottom_title}>
         <ProfileBottomButton
