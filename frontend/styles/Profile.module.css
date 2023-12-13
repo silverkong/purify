@@ -84,6 +84,9 @@
 
 .section_profile_bottom_title > img.msgImg {
   margin-right: 0.62rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
 }
 
 .box_connected_social_list {
