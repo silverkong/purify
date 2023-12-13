@@ -34,9 +34,10 @@ export default function SearchDetail({ principal, searchPrincipal }) {
   const [name, setName] = useState("")
   const [pfp, setPfp] = useState("")
 
-  // Like, Dislike
+  // Like, Dislike, vly point
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
+  const [vlyPoint, setVlyPoint] = useState(0)
 
   // Commented
   const [commented, setCommented] = useState(false)
@@ -73,6 +74,7 @@ export default function SearchDetail({ principal, searchPrincipal }) {
       setComments(comments)
       setName(profile[1])
       setPfp(profile[2])
+      setVlyPoint(profile[5])
       setLike(profile[3])
       setDislike(profile[4])
       console.log("Profile set", profile)
@@ -91,6 +93,7 @@ export default function SearchDetail({ principal, searchPrincipal }) {
         principal={searchPrincipal}
         like={like}
         dislike={dislike}
+        vlyPoint={vlyPoint}
       />
       <section className={styles.section_profile_bottom_title}>
         <img src={message} className={styles.msgImg} />

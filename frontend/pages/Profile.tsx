@@ -196,7 +196,7 @@ export default function Profile({
     }
   }
 
-  const handleCommentSubmit = async () => {
+  const handleSearch = async () => {
     console.log("Searching with address", walletAddress)
     const res = await authentication.query_ethAddress(walletAddress)
     if (!res) {
@@ -301,7 +301,7 @@ export default function Profile({
               <button
                 style={btnStyle as React.CSSProperties}
                 type="submit"
-                onClick={handleCommentSubmit}
+                onClick={handleSearch}
               >
                 <img
                   src={SendImg}
