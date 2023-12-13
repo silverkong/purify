@@ -85,14 +85,13 @@ export default function SearchDetail({principal,commentPrincipal}) {
   return (
     <div>
       <Logo />
-      {/* <ProfileTop
+      <ProfileTop
         name={name}
         pfp={pfp}
         principal={commentPrincipal}
         like={like}
         dislike={dislike}
-      /> */}
-      {/* 일단 각주처리 후 진행 */}
+      />
       <section className={styles.section_profile_bottom_title}>
         <img src={message} className={styles.msgImg} />
         <ProfileBottomButton

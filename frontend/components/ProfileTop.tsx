@@ -14,7 +14,6 @@ const thumbStyle = {
   marginRight: "1.88rem",
 }
 
-
 const ProfileTop = ({
   name,
   pfp,
@@ -39,9 +38,9 @@ const ProfileTop = ({
         <div className={styles.box_profile_info_bottom}>
           <h1>0</h1>
           <span>point</span>
-          <img src={like} style={{ marginLeft: "1.88rem" }} />
+          <img src={likeImg} style={{ marginLeft: "1.88rem" }} />
           <span style={thumbStyle}>{likeC}</span>
-          <img src={dislike} />
+          <img src={dislikeImg} />
           <span style={thumbStyle}>{dislikeC}</span>
         </div>
       </div>
@@ -50,4 +49,3 @@ const ProfileTop = ({
 }
 
 export default ProfileTop
-
