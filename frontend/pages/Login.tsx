@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import styles from "../styles/Login.module.css"
 import ButtonSolid from "../components/ButtonSolid"
+import "@connect2ic/core/style.css"
 
 import lgPurifyText from "../assets/lg_purify_text.svg"
 import React, { useEffect, useState } from "react"
@@ -72,7 +73,9 @@ const Login = ({
       </div>
       <img className={styles.logo_text} src={lgPurifyText} alt="purify" />
       {/* <ButtonSolid content={"login"} onClick={login} /> */}
-      <ConnectButton onConnect={login} />
+      <div>
+        <ConnectButton onConnect={login} />
+      </div>
       <ConnectDialog />
     </section>
   )
