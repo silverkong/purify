@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import logo from "./assets/dfinity.svg"
 import { createClient } from "@connect2ic/core"
@@ -36,6 +36,11 @@ import { polygon } from "wagmi/chains"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect"
 import { alchemyProvider } from "wagmi/providers/alchemy"
+
+import { useNavigate } from "react-router-dom"
+
+import styles from "./styles/Login.module.css"
+import lgPurifyText from "./assets/lg_purify_text.svg"
 
 // 1. Get PROJECT_ID
 const projectId = import.meta.env.VITE_PROJECT_ID
@@ -77,12 +82,42 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 import Comment from "./pages/Comment"
 
 function App() {
-  // const { isConnected, principal } = useConnect()
+  const { isConnected, principal: useConnectPrincipal } = useConnect()
+  const navigate = useNavigate()
+
+  const [authenticationCanister] = useCanister("authentication")
 
   const [TFAuthed, setTFAAuthed] = useState(false)
   const [principal, setPrincipal] = useState("")
   const [commentPrincipal, setCommentPrincipal] = useState("")
   const [searchPrincipal, setSearchPrincipal] = useState("")
+  const [TFRegistered, setTFRegistered] = useState(false)
+
+  useEffect(() => {
+    if (!isConnected) {
+      return
+    }
+    setPrincipal(useConnectPrincipal.toString())
+    handleOTP()
+    console.log("isConnected", isConnected)
+    console.log("principal", useConnectPrincipal.toString())
+  }, [isConnected])
+
+  const handleOTP = async () => {
+    console.log("Handling")
+    const res = await authenticationCanister.query_secretProvided(
+      useConnectPrincipal.toString(),
+    )
+    if (res) {
+      setTFRegistered(true)
+    }
+    console.log("LOGIN RES", res)
+    if (res === true) {
+      navigate("/verifyOTP")
+    } else {
+      navigate("/createOTP")
+    }
+  }
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -92,22 +127,27 @@ function App() {
           <div>{principal}</div>
         </div>
       )} */}
-      {/* <div>
+      <section className={styles.section_login}>
+        <div className={styles.logo}>
+          <div className={styles.wave}></div>
+          <div className={styles.wave}></div>
+        </div>
+        <img className={styles.logo_text} src={lgPurifyText} alt="purify" />
         <ConnectButton />
-      </div> */}
+      </section>
       {/* <ConnectDialog /> */}
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <Login
               TFAuthed={TFAuthed}
               setTFAAuthed={setTFAAuthed}
-              principal={principal}
-              setPrincipal={setPrincipal}
+              // principal={principal}
+              // setPrincipal={setPrincipal}
             />
           }
-        />
+        /> */}
         <Route
           path="/createOTP"
           element={<CreateOTP principal={principal} />}
