@@ -331,6 +331,7 @@ const inputStyleGray = {
   width: "100%",
   height: "2.9375rem",
   display: "flex",
+  padding: "0 30px",
 }
 
 const inputStyleBlue = {
@@ -342,6 +343,7 @@ const inputStyleBlue = {
   width: "100%",
   height: "2.9375rem",
   display: "flex",
+  padding: "0 30px",
 }
 
 const inputBox = {
