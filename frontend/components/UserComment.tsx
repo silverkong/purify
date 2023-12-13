@@ -1,12 +1,12 @@
 import React from "react"
 import PuriImg from "../image/smallPurify.png"
 import "../styles/components/UserComment.css"
+import CommentList from "./CommentList"
 
-const UserComment = () => { //일단 UI만 먼저 짜자
+const UserComment = ({ comments }) => {
   return (
     <div className="userCommnetBox">
-        <img src = {PuriImg}/>
-        <p className="commentText">그만 하고시퍼!</p>
+      <CommentList comments={comments} />
     </div>
   )
 }

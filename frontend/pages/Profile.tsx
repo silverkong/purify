@@ -23,7 +23,11 @@ enum SocialFi {
   FriendTech,
   StarsArena,
 }
-export default function Profile({ principal, setCommentPrincipal }) {
+export default function Profile({
+  principal,
+  setCommentPrincipal,
+  setSearchPrincipal,
+}) {
   // navigate
   const navigate = useNavigate()
   // Canisters
@@ -194,7 +198,20 @@ export default function Profile({ principal, setCommentPrincipal }) {
     }
   }
 
-  const handleCommentSubmit = async () => {}
+  const handleCommentSubmit = async () => {
+    console.log("Searching with address", walletAddress)
+    const res = await authentication.query_ethAddress(walletAddress)
+    if (!res) {
+      console.log("Queryying with address", walletAddress)
+      console.log("res", res)
+      console.log("No Purify ACC found")
+      return
+    } else {
+      console.log("Purify ACC found", res)
+      setSearchPrincipal(res)
+      navigate("/searchDetail")
+    }
+  }
 
   return (
     <div>
