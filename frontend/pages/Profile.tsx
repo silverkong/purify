@@ -1,8 +1,9 @@
 import styles from "../styles/Profile.module.css"
 import React, { ChangeEvent, useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
-import { useConnect, useDisconnect } from "wagmi"
+import { useDisconnect } from "wagmi"
 import SendImg from "../image/send.png"
+
 // components
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
@@ -22,11 +23,7 @@ enum SocialFi {
   FriendTech,
   StarsArena,
 }
-export default function Profile({
-  principal,
-  setPrincipal,
-  setCommentPrincipal,
-}) {
+export default function Profile({ principal, setCommentPrincipal }) {
   // navigate
   const navigate = useNavigate()
   // Canisters
@@ -34,7 +31,7 @@ export default function Profile({
   const [purify] = useCanister("purify")
   const [authentication] = useCanister("authentication")
 
-  const [holding, setHolding] = useState(false)
+  const [bottomChk, setBottomChk] = useState([true, false, false])
   const [connected, setConnected] = useState(false)
   const [search, setSearch] = useState(false)
   // Profile Query
@@ -76,7 +73,7 @@ export default function Profile({
   const handleRerender = () => {
     queryHolder()
     setRerender(false)
-   }
+  }
   const connectWalletAndQuery = async () => {
     await connect()
     console.log("connected")
@@ -211,36 +208,70 @@ export default function Profile({
       />
       <section className={styles.section_profile_bottom_title}>
         <ProfileBottomButton
-          className={holding ? "" : styles.btn_profile_bottom_active}
+          className={bottomChk[0] ? styles.btn_profile_bottom_active : ""}
           content="connected social"
           onClick={() => {
-            setHolding(false)
-            setSearch(false)
+            setBottomChk([true, false, false])
           }}
         />
         <ProfileBottomButton
-          className={holding ? styles.btn_profile_bottom_active : ""}
+          className={bottomChk[1] ? styles.btn_profile_bottom_active : ""}
           content="holding"
           onClick={() => {
-            setHolding(true)
-            setSearch(false)
+            setBottomChk([false, true, false])
           }}
         />
         <ProfileBottomButton
-          className={
-            search && !holding && !connected
-              ? styles.btn_profile_bottom_active
-              : ""
-          }
+          className={bottomChk[2] ? styles.btn_profile_bottom_active : ""}
           content="search"
           onClick={() => {
-            setSearch(true)
-            setHolding(false)
+            setBottomChk([false, false, true])
           }}
         />
       </section>
       <section>
-        {search ? (
+        {/* connected social */}
+        {bottomChk[0] ? (
+          <section className={styles.section_connected_social}>
+            {index &&
+              index.map(
+                (address, key) =>
+                  address && (
+                    <ListSocialConnected
+                      key={key}
+                      address={address}
+                      disconnect={() => disconnect()}
+                    />
+                  ),
+              )}
+            <SocialConnect
+              handleSocialFi={handleSocialFi}
+              socialFi={socialFi}
+              purify={purify}
+              principal={principal}
+              setIndex={setIndex}
+              setRerender={setRerender}
+            />
+          </section>
+        ) : bottomChk[1] ? (
+          // holding
+          <section className={styles.section_holding}>
+            {holdings &&
+              holdings.map((holding) => (
+                // <div key={holding.id}>{holding.twitterName}</div>
+                <ListSocialHolding
+                  key={holding.id}
+                  name={holding.twitterName}
+                  address={holding.address}
+                  principal={holding.principal}
+                  onClick={() => {
+                    handleComment(holding.address)
+                  }}
+                />
+              ))}
+          </section>
+        ) : (
+          // search
           <section>
             <div style={inputBox}>
               <input
@@ -267,44 +298,6 @@ export default function Profile({
               walletAddress={walletAddress}
               // friendList={friendList}
               // 친구 리스트 어떻게 가져오지......
-            />
-          </section>
-        ) : holding ? (
-          <section className={styles.section_holding}>
-            {holdings &&
-              holdings.map((holding) => (
-                // <div key={holding.id}>{holding.twitterName}</div>
-                <ListSocialHolding
-                  key={holding.id}
-                  name={holding.twitterName}
-                  address={holding.address}
-                  principal={holding.principal}
-                  onClick={() => {
-                    handleComment(holding.address)
-                  }}
-                />
-              ))}
-          </section>
-        ) : (
-          <section className={styles.section_connected_social}>
-            {index &&
-              index.map(
-                (address, key) =>
-                  address && (
-                    <ListSocialConnected
-                      key={key}
-                      address={address}
-                      disconnect={() => disconnect()}
-                    />
-                  ),
-              )}
-            <SocialConnect
-              handleSocialFi={handleSocialFi}
-              socialFi={socialFi}
-              purify={purify}
-              principal={principal}
-              setIndex={setIndex}
-              setRerender={setRerender}
             />
           </section>
         )}

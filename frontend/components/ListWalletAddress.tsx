@@ -46,7 +46,7 @@ const ListWalletAddress = ({walletAddress}) => {
       </div>
       {/* <span>{name}</span> */}
       <span style={{marginLeft:"1rem"}}>pingping</span>  {/* walletAddress에 맞는 socialFi*/}
-      <span style={{marginLeft:"0.63rem"}}>@beakerjin</span> {/* 임시이름 */}
+      <span style={{marginLeft:"0.63rem"}}>@beakerjin</span> {/* walletAddress에 맞는  */}
       <button className="detail-btn" onClick={detailNavigate}>
         detail
         {/* searchDetail로 가는 코드 추가해야됨 */}

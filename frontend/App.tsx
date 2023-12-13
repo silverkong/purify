@@ -122,7 +122,6 @@ function App() {
           element={
             <Profile
               principal={principal}
-              setPrincipal={setPrincipal}
               setCommentPrincipal={setCommentPrincipal}
             />
           }
@@ -139,7 +138,9 @@ function App() {
         <Route
           path="/searchDetail"
           element={
-            <SearchDetail/>
+            <SearchDetail
+            principal={principal}
+            commentPrincipal={commentPrincipal}/>
           }
         />
       </Routes>
