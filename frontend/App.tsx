@@ -82,6 +82,7 @@ function App() {
   const [TFAuthed, setTFAAuthed] = useState(false)
   const [principal, setPrincipal] = useState("")
   const [commentPrincipal, setCommentPrincipal] = useState("")
+  const [searchPrincipal, setSearchPrincipal] = useState("")
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -123,6 +124,7 @@ function App() {
             <Profile
               principal={principal}
               setCommentPrincipal={setCommentPrincipal}
+              setSearchPrincipal={setSearchPrincipal}
             />
           }
         />
@@ -139,8 +141,9 @@ function App() {
           path="/searchDetail"
           element={
             <SearchDetail
-            principal={principal}
-            commentPrincipal={commentPrincipal}/>
+              principal={principal}
+              searchPrincipal={searchPrincipal}
+            />
           }
         />
       </Routes>

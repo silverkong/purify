@@ -17,7 +17,7 @@ const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
 //   principal: string
 // }
-export default function SearchDetail({principal,commentPrincipal}) {
+export default function SearchDetail({ principal, searchPrincipal }) {
   // Canisters
   const [purify] = useCanister("purify")
 
@@ -58,15 +58,15 @@ export default function SearchDetail({principal,commentPrincipal}) {
 
   const queryProfile = async () => {
     console.log("Querying profile")
-    if (commentPrincipal === null) {
+    if (searchPrincipal === null) {
       return
     }
-    const profile = (await purify.query_profile(commentPrincipal)) as any
-    const comments = await purify.query_comments(commentPrincipal)
+    const profile = (await purify.query_profile(searchPrincipal)) as any
+    const comments = await purify.query_comments(searchPrincipal)
     console.log("Profile queried")
     console.log(profile)
     if (profile.length === 0) {
-      await purify.create_profile(commentPrincipal)
+      await purify.create_profile(searchPrincipal)
       console.log("Profile created")
     } else {
       setProfile(profile)
@@ -88,7 +88,7 @@ export default function SearchDetail({principal,commentPrincipal}) {
       <ProfileTop
         name={name}
         pfp={pfp}
-        principal={commentPrincipal}
+        principal={searchPrincipal}
         like={like}
         dislike={dislike}
       />
@@ -100,7 +100,7 @@ export default function SearchDetail({principal,commentPrincipal}) {
           onClick={() => setHolding(false)}
         />
       </section>
-      <UserComment/> {/* comment list 출력/UI*/}
+      <UserComment comments={comments} />
     </div>
   )
 }
