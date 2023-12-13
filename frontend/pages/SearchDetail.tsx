@@ -6,7 +6,7 @@ import { useDisconnect } from "wagmi"
 import Logo from "../components/Logo"
 import ProfileTop from "../components/ProfileTop"
 import ProfileBottomButton from "../components/ProfileBottomButton"
-import CommentBox from "../components/CommentBox"
+import CommentList from "../components/CommentList"
 
 import { useAccount } from "wagmi"
 
@@ -17,7 +17,7 @@ const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {
 //   principal: string
 // }
-export default function SearchDetail() {
+export default function SearchDetail({principal,commentPrincipal}) {
   // Canisters
   const [purify] = useCanister("purify")
 
@@ -56,14 +56,43 @@ export default function SearchDetail() {
     }
   }, [commented])
 
-  // const queryAll = async () => {
-  //   await queryProfile()
-  // }
+  const queryProfile = async () => {
+    console.log("Querying profile")
+    if (commentPrincipal === null) {
+      return
+    }
+    const profile = (await purify.query_profile(commentPrincipal)) as any
+    const comments = await purify.query_comments(commentPrincipal)
+    console.log("Profile queried")
+    console.log(profile)
+    if (profile.length === 0) {
+      await purify.create_profile(commentPrincipal)
+      console.log("Profile created")
+    } else {
+      setProfile(profile)
+      setComments(comments)
+      setName(profile[1])
+      setPfp(profile[2])
+      setLike(profile[3])
+      setDislike(profile[4])
+      console.log("Profile set", profile)
+      console.log("Comments set", comments)
+      console.log("Name set", name)
+      console.log("Pfp set", pfp)
+    }
+  }
 
   return (
     <div>
       <Logo />
-
+      {/* <ProfileTop
+        name={name}
+        pfp={pfp}
+        principal={commentPrincipal}
+        like={like}
+        dislike={dislike}
+      /> */}
+      {/* 일단 각주처리 후 진행 */}
       <section className={styles.section_profile_bottom_title}>
         <img src={message} className={styles.msgImg} />
         <ProfileBottomButton
@@ -72,6 +101,8 @@ export default function SearchDetail() {
           onClick={() => setHolding(false)}
         />
       </section>
+      <CommentList comments={comments} />
+      {/* comment list 출력 */}
     </div>
   )
 }
