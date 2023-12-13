@@ -77,8 +77,6 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 import Comment from "./pages/Comment"
 
 function App() {
-  // const { isConnected, principal } = useConnect()
-
   const [TFAuthed, setTFAAuthed] = useState(false)
   const [principal, setPrincipal] = useState("")
   const [commentPrincipal, setCommentPrincipal] = useState("")
@@ -94,8 +92,8 @@ function App() {
       )} */}
       {/* <div>
         <ConnectButton />
-      </div> */}
-      {/* <ConnectDialog /> */}
+      </div>
+      <ConnectDialog /> */}
       <Routes>
         <Route
           path="/"
@@ -103,7 +101,7 @@ function App() {
             <Login
               TFAuthed={TFAuthed}
               setTFAAuthed={setTFAAuthed}
-              principal={principal}
+              // principal={principal}
               setPrincipal={setPrincipal}
             />
           }

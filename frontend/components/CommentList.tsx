@@ -4,6 +4,7 @@ import PuriImg from "../assets/lg_purify.svg"
 const ListStyle = {
   display: "flex",
   marginTop: "1rem",
+  alignItems: "center",
 }
 
 const CommentList = ({ comments }) => {
@@ -12,7 +13,7 @@ const CommentList = ({ comments }) => {
       {comments &&
         comments.map((comment) => (
           <div style={ListStyle}>
-            <img src={PuriImg} style={{ width: "40px" }} />
+            <img src={PuriImg} style={{ width: "40px", marginRight: "15px" }} />
             <p>{`${comment.comment}`}</p>
           </div>
         ))}
