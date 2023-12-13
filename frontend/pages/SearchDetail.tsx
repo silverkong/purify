@@ -11,7 +11,7 @@ import UserComment from "../components/UserComment"
 import { useAccount } from "wagmi"
 
 //image
-import message from "../image/message.png"
+import message from "../assets/ic_message.svg"
 
 const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {

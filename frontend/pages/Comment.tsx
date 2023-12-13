@@ -11,7 +11,7 @@ import CommentBox from "../components/CommentBox"
 import { useAccount } from "wagmi"
 
 //image
-import message from "../image/message.png"
+import message from "../assets/ic_message.svg"
 
 const baseURL = "https://base.llamarpc.com/"
 // interface ProfileProps {

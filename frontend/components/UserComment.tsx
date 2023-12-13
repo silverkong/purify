@@ -1,5 +1,5 @@
 import React from "react"
-import PuriImg from "../image/smallPurify.png"
+import PuriImg from "../assets/lg_purify.svg"
 import "../styles/components/UserComment.css"
 import CommentList from "./CommentList"
 
