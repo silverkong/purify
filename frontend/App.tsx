@@ -138,7 +138,9 @@ function App() {
         <Route
           path="/searchDetail"
           element={
-            <SearchDetail/>
+            <SearchDetail
+            principal={principal}
+            commentPrincipal={commentPrincipal}/>
           }
         />
       </Routes>
