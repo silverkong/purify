@@ -2,7 +2,7 @@ import styles from "../styles/Profile.module.css"
 import React, { ChangeEvent, useEffect, useState } from "react"
 import { useCanister } from "@connect2ic/react"
 import { useDisconnect } from "wagmi"
-import SendImg from "../image/send.png"
+import SendImg from "../assets/ic_send.svg"
 
 // components
 import Logo from "../components/Logo"
@@ -84,7 +84,6 @@ export default function Profile({
     console.log("connected")
     await queryAll()
   }
-  
 
   const queryAll = async () => {
     await queryIndex()

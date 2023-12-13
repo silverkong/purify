@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import React, { useRef, useState } from "react"
 import "../styles/center.css"
-import google from "../image/google.png"
+import google from "../assets/lg_google.svg"
 import Logo from "../components/Logo"
 
 import { authenticator as a } from "@otplib/preset-browser"

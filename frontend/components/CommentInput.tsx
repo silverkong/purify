@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import GoodBtn from "../components/GoodBtn"
 import HateBtn from "../components/HateBtn"
-import SendImg from "../image/send.png"
+import SendImg from "../assets/ic_send.svg"
 import { useCanister } from "@connect2ic/react"
 
 const CommentInput = ({ principal, commentPrincipal, setCommented }) => {
@@ -27,7 +27,7 @@ const CommentInput = ({ principal, commentPrincipal, setCommented }) => {
   const btnStyle = isInputEmpty ? btnStyleGray : btnStyleBlue
   const inputBoxStyle = {
     display: "flex",
-    marginTop: "5rem",
+    alignItems: "flex-end",
   }
   const [comment, setComment] = useState("")
 
@@ -103,6 +103,9 @@ const inputBox = {
 }
 
 const btnStyleGray = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   width: "4.375rem",
   height: "4.375rem",
   flexShrink: "0",
@@ -114,6 +117,9 @@ const btnStyleGray = {
 }
 
 const btnStyleBlue = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   width: "4.375rem",
   height: "4.375rem",
   flexShrink: "0",
