@@ -21,6 +21,7 @@ import { Authenticator } from "./components/Authenticator"
 import Login from "./pages/Login"
 import CreateOTP from "../frontend/pages/CreateOTP"
 import VerifyOTP from "./pages/VerifyOTP"
+import SearchDetail from "./pages/SearchDetail"
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
@@ -81,6 +82,7 @@ function App() {
   const [TFAuthed, setTFAAuthed] = useState(false)
   const [principal, setPrincipal] = useState("")
   const [commentPrincipal, setCommentPrincipal] = useState("")
+  const [searchPrincipal, setSearchPrincipal] = useState("")
 
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -121,8 +123,8 @@ function App() {
           element={
             <Profile
               principal={principal}
-              setPrincipal={setPrincipal}
               setCommentPrincipal={setCommentPrincipal}
+              setSearchPrincipal={setSearchPrincipal}
             />
           }
         />
@@ -132,6 +134,15 @@ function App() {
             <Comment
               principal={principal}
               commentPrincipal={commentPrincipal}
+            />
+          }
+        />
+        <Route
+          path="/searchDetail"
+          element={
+            <SearchDetail
+              principal={principal}
+              searchPrincipal={searchPrincipal}
             />
           }
         />

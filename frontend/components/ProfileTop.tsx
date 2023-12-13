@@ -1,7 +1,8 @@
 import React from "react"
 import styles from "../styles/Profile.module.css"
-import likeImg from "../image/like.png"
-import dislikeImg from "../image/dislike.png"
+import purify from "../assets/lg_purify.svg"
+import likeImg from "../assets/ic_like.svg"
+import dislikeImg from "../assets/ic_dislike.svg"
 
 const thumbStyle = {
   color: "#444",
@@ -14,7 +15,6 @@ const thumbStyle = {
   marginRight: "1.88rem",
 }
 
-
 const ProfileTop = ({
   name,
   pfp,
@@ -25,7 +25,9 @@ const ProfileTop = ({
   return (
     <section className={styles.section_profile_top}>
       {pfp === "" ? (
-        <div className={styles.box_profile_img}>프로필이미지 </div>
+        <div className={styles.box_profile_img}>
+          <img src={purify} alt="프로필이미지" />
+        </div>
       ) : (
         <div className={styles.box_profile_img}>
           <img src={pfp} alt="프로필이미지" />
@@ -39,9 +41,9 @@ const ProfileTop = ({
         <div className={styles.box_profile_info_bottom}>
           <h1>0</h1>
           <span>point</span>
-          <img src={like} style={{ marginLeft: "1.88rem" }} />
+          <img src={likeImg} style={{ width: "25px", marginLeft: "1.88rem" }} />
           <span style={thumbStyle}>{likeC}</span>
-          <img src={dislike} />
+          <img src={dislikeImg} style={{ width: "25px" }} />
           <span style={thumbStyle}>{dislikeC}</span>
         </div>
       </div>
@@ -50,4 +52,3 @@ const ProfileTop = ({
 }
 
 export default ProfileTop
-
