@@ -164,16 +164,6 @@
   cursor: pointer;
 }
 
-.btn_social_connect_disabled {
-  width: 130px;
-  margin-left: auto;
-  padding: 12px 0;
-  background: none;
-  background-color: var(--color-primary);
-  border-radius: 30px;
-  color: var(--color-white);
-  cursor: pointer;
-}
 
 .btn_social_connect:disabled {
   background-color: var(--color-gray);
