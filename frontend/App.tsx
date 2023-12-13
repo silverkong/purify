@@ -21,6 +21,7 @@ import { Authenticator } from "./components/Authenticator"
 import Login from "./pages/Login"
 import CreateOTP from "../frontend/pages/CreateOTP"
 import VerifyOTP from "./pages/VerifyOTP"
+import SearchDetail from "./pages/SearchDetail"
 
 // SocialQuery
 import { SocialQuery } from "./components/SocialQuery"
@@ -133,6 +134,12 @@ function App() {
               principal={principal}
               commentPrincipal={commentPrincipal}
             />
+          }
+        />
+        <Route
+          path="/searchDetail"
+          element={
+            <SearchDetail/>
           }
         />
       </Routes>
