@@ -12,7 +12,7 @@ const CommentList = ({ comments }) => {
       {comments &&
         comments.map((comment) => (
           <div style={ListStyle}>
-            <img src={PuriImg} />
+            <img src={PuriImg} style={{ width: "40px" }} />
             <p>{`${comment.comment}`}</p>
           </div>
         ))}
