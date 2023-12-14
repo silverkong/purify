@@ -6,8 +6,8 @@ One paragraph of project description goes here. Things to include:
 - Link to the live version/canister, if there is one
 
 
-https://github.com/silverkong/purify/assets/107299318/4c665fd1-a865-4ab0-bda4-43e7a6cffc0b
-![업로드용](https://github.com/silverkong/purify/assets/107299318/78dfb053-57f0-4bf2-bb9f-49fdd09d3e8d)
+![업로드용](https://github.com/silverkong/purify/assets/107299318/19440971-8c00-46e2-a31a-7613aa5fd75b)
+
 
 
 ## Introduction
