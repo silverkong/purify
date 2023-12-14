@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Logo from "../components/Logo"
 import CreateOTPCode from "../components/CreateOTPCode"
 
