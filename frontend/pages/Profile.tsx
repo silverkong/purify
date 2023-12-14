@@ -79,6 +79,7 @@ export default function Profile({
   }, [rerender])
   const handleRerender = () => {
     queryHolder()
+    queryFriendTech()
     setRerender(false)
   }
   const connectWalletAndQuery = async () => {
