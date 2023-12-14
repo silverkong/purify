@@ -17,6 +17,8 @@ import { useAccount } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
 import { useNavigate } from "react-router-dom"
 
+import axios from "axios"
+
 enum SocialFi {
   NextId,
   PostTech,
@@ -141,9 +143,13 @@ export default function Profile({
     console.log("address", address)
     console.log("httpOutcalls", httpOutcalls)
     try {
-      const res = await httpOutcalls.queryFriendTech(address)
-      console.log("res", res)
-      const jsonRes = JSON.parse(res as string)
+      // const res = await httpOutcalls.queryFriendTech(address)
+      // console.log("res", res)
+      // const jsonRes = JSON.parse(res as string)
+      const response = await axios.get(
+        "https://prod-api.kosetto.com/users/" + address,
+      )
+      const jsonRes = response.data
       console.log("success!", jsonRes)
       setName(jsonRes.twitterName)
       await purify.update_profile(principal, jsonRes.twitterName, 0)
@@ -163,9 +169,23 @@ export default function Profile({
     console.log("address", address)
     console.log("httpOutcalls", httpOutcalls)
     try {
-      const res = await httpOutcalls.queryHolder(address)
+      // const res = await httpOutcalls.queryHolder(address)
       // if (!res) return
-      const jsonRes = JSON.parse(res as string)
+      // const jsonRes = JSON.parse(res as string)
+      const options = {
+        method: "GET",
+        url:
+          "https://friend-tech.p.rapidapi.com/users/" +
+          address +
+          "/token/holders",
+        headers: {
+          "X-RapidAPI-Key":
+            "193486b59emsh42493bbebcba2aep1af1cdjsn4ddd64333322",
+          "X-RapidAPI-Host": "friend-tech.p.rapidapi.com",
+        },
+      }
+      const response = await axios.request(options)
+      const jsonRes = response.data
       console.log(jsonRes.users)
       // const holdingsArr = Object.keys(jsonRes.users).map((key) => jsonRes[key])
       // const list1 = list2.map(innerList => innerList[1]);
